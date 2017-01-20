@@ -103,6 +103,8 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
         m_PreventSpill = true;
 
         IsSelected = true;
+
+        transform.Rotate(Vector3.forward, 180.0f);
     }
 
     public void Unselect()
@@ -110,5 +112,7 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
         IsSelected = false;
         transform.position = m_StartPos;
         m_PreventSpill = false;
+
+        transform.Rotate(Vector3.forward, -180.0f);
     }
 }

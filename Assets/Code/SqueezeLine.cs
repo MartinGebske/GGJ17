@@ -13,6 +13,7 @@ public class SqueezeLine : MonoBehaviour
     [Header("Config")]
     public Material Material;
     public float Width = 0.25f;
+    public float Height = 0.2f;
 
     private List<Vector3> Points = new List<Vector3>();
 
@@ -51,7 +52,7 @@ public class SqueezeLine : MonoBehaviour
             Vector3 right = Points[i] + rightDir * Width;
 
             // Root Location
-            meshBuilder.Vertices.Add(Points[i] + Vector3.up * 0.2f);
+            meshBuilder.Vertices.Add(Points[i] + Vector3.up * Height);
             meshBuilder.UVs.Add(new Vector2(0.0f, 0.0f));
             meshBuilder.Normals.Add(Vector3.up);
 
@@ -61,7 +62,7 @@ public class SqueezeLine : MonoBehaviour
             meshBuilder.Normals.Add(Vector3.up);
 
             // Forward from Root
-            meshBuilder.Vertices.Add(forward + Vector3.up * 0.2f);
+            meshBuilder.Vertices.Add(forward + Vector3.up * Height);
             meshBuilder.UVs.Add(new Vector2(1.0f, 1.0f));
             meshBuilder.Normals.Add(Vector3.up);
 
