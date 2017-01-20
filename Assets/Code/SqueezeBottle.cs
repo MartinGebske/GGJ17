@@ -29,6 +29,10 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
 
     private void Update()
     {
+        // DEBUGGING
+        if (Input.GetKeyDown(KeyCode.R))
+            Reset();
+
         // handle movement here when it is selected
         if (IsSelected)
         {
@@ -95,6 +99,12 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
     {
         CurrentPoints = new List<Vector3>();
         CurrentSqueezeLine = null;
+
+        SqueezeLine[] allLines = FindObjectsOfType<SqueezeLine>();
+        foreach (SqueezeLine line in allLines)
+        {
+            Destroy(line.gameObject);
+        }
     }
 
     public void Select()
