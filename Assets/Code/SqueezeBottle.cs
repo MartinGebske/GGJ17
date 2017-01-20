@@ -8,8 +8,12 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
 {
     [Header("Config")]
     public SqueezeLine SqueezeLinePrefab;
+    public SqueezeLine SqueezeLineValidationPrefab;
+
     public float PointsMinDistance = 0.1f;
     public float UpOffset = 2.0f;
+    public float SqueezeDelaySeconds = 0.15f;
+    public Vector3 ValidationOffset = new Vector3(-5.0f, 2.0f, 0.0f);
 
     private SqueezeLine CurrentSqueezeLine;
     private List<Vector3> CurrentPoints = new List<Vector3>();
@@ -20,6 +24,14 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
     private ParticleSystem m_ParticleSystem;
     private Vector3 m_StartPos;
     private bool m_PreventSpill = false;
+
+
+    public float ValidationSineX = 1.0f; // kleiner streckt die kurve in die Länge | größer macht mehr intervalle
+
+    public float ValidationSineY = 1.0f; // kleiner macht kleinere Kurven | größer größere Kurven
+    // -> 0 ist ein strich, 1 ist kurvig
+
+    private SqueezeLine valSqueezeLine;
 
     private void Start()
     {
@@ -32,6 +44,10 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
         // DEBUGGING
         if (Input.GetKeyDown(KeyCode.R))
             Reset();
+        if (Input.GetKeyDown(KeyCode.T))
+            ShowValidationWave();
+        if (Input.GetKeyDown(KeyCode.Z))
+            Debug.Log(valSqueezeLine.GetTotalDeviation(CurrentPoints));
 
         // handle movement here when it is selected
         if (IsSelected)
@@ -79,7 +95,7 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
 
     IEnumerator AddNewPoint(SqueezeLine toLine, Vector3 point)
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(SqueezeDelaySeconds);
 
         toLine.AddNewPoint(point);
     }
@@ -124,5 +140,16 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
         m_PreventSpill = false;
 
         transform.Rotate(Vector3.forward, -180.0f);
+    }
+
+
+    private void ShowValidationWave()
+    {
+        valSqueezeLine = Instantiate<SqueezeLine>(SqueezeLineValidationPrefab);
+
+        for (float i = 0.0f; i < 10.0f; i+=0.1f)
+        {
+            valSqueezeLine.AddNewPoint(new Vector3(i, 0.0f, Mathf.Sin(i * ValidationSineX) * ValidationSineY) + ValidationOffset);
+        }
     }
 }

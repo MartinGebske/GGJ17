@@ -31,6 +31,29 @@ public class SqueezeLine : MonoBehaviour
         UpdateMesh();
     }
 
+    public float GetTotalDeviation(List<Vector3> FromPoints)
+    {
+        float finalDeviation = 0.0f;
+        // for every point in FromPoints get distance to nearest point in Points, add all those distances
+
+        foreach(Vector3 CheckPoint in FromPoints)
+        {
+            float smallestDistance = float.MaxValue;
+
+            for (int i = 0; i < Points.Count; i++)
+            {
+                float tempDistance = Vector3.Distance(
+                    new Vector3(CheckPoint.x, 0.0f, CheckPoint.z), new Vector3(Points[i].x, 0.0f, Points[i].z));
+                if (tempDistance < smallestDistance)
+                    smallestDistance = tempDistance;
+            }
+
+            finalDeviation += Mathf.Pow(smallestDistance, 2.0f);
+        }
+
+        // in order for FromPoints.Count == 0 not be 0 Deviation, have this 100 std deviation
+        return Mathf.Clamp(100.0f - FromPoints.Count, 0.0f, 100.0f) + finalDeviation / (FromPoints.Count + 1);
+    }
 
     private void UpdateMesh()
     {

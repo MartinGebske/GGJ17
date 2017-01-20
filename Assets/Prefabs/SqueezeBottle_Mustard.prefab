@@ -173,8 +173,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SqueezeLinePrefab: {fileID: 114728818687691972, guid: be4ac3fc43be782449f7e1d319b6d950,
     type: 2}
+  SqueezeLineValidationPrefab: {fileID: 114728818687691972, guid: 61142e6bcdfa41f49aee451bd8c4eedb,
+    type: 2}
   PointsMinDistance: 0.15
   UpOffset: 3
+  SqueezeDelaySeconds: 0.15
+  ValidationOffset: {x: -5, y: 2, z: 0}
+  ValidationSineX: 1
+  ValidationSineY: 1
 --- !u!136 &136781839922876446
 CapsuleCollider:
   m_ObjectHideFlags: 1
