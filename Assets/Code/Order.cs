@@ -9,6 +9,8 @@ public class Order : MonoBehaviour
     [Tooltip("Welche Zutaten werden gebraucht?")]
     public GameObject[] ingredients;
 
+    public float endposition;
+
     public AudioClip guestHappySound;
     public AudioClip guestAngrySound; 
    
@@ -19,10 +21,13 @@ public class Order : MonoBehaviour
     private AudioSource audioSource;
 
     private OrderManager orderManager;
-    
+
+    RectTransform orderTransform;
 
     void Start ()
     {
+        orderTransform = GetComponent<RectTransform>();
+
         orderManager = FindObjectOfType<OrderManager>();
 
         int currentLevel = orderManager.levelOnCreation;
@@ -32,20 +37,27 @@ public class Order : MonoBehaviour
         currentIngredients = CalculateMaxIngredients(currentLevel);
 
         FillIngredients();
+    }
 
-        StartCoroutine("OrderIsActive");
+    void Update()
+    {
+        orderTransform.Translate(Vector3.right * orderManager.speedOnCreation);
+
+        if (orderTransform.anchoredPosition.x > endposition)
+        { GuestIsAngry(); }
     }
 
     public void GuestIsHappy()
     {
-        StopCoroutine("OrderIsActive");
         audioSource.PlayOneShot(guestHappySound);
         GameManager.GetInstance(true).orders++;
     }
 
-    void GuestIsAngry()
+    public void GuestIsAngry()
     {
+        Debug.Log("Bestellung nicht ausgeführt!!!");
         audioSource.PlayOneShot(guestAngrySound);
+        StartCoroutine(WaitForDestroy());
     }
 
     void FillIngredients()
@@ -63,10 +75,7 @@ public class Order : MonoBehaviour
         foreach(int i in generatedIndices)
         {
             chosenIng.Add(ingredients[i]);
-            foreach (GameObject activeIngredient in ingredients)
-            {
-                activeIngredient.SetActive(true);
-            }
+            ingredients[i].SetActive(true);
         }
     }
    
@@ -77,30 +86,36 @@ public class Order : MonoBehaviour
         switch (level)
         {
             case 0:
-                maxIngredients = 2;
+                maxIngredients = 1;
             break;
 
             case 1:
-                maxIngredients = 3;
+                maxIngredients = 2;
                 break;
 
             case 2:
-                maxIngredients = 4;
+                maxIngredients = 2;
                 break;
 
             case 3:
-                maxIngredients = 5;
+                maxIngredients = 4;
                 break;
 
             case 4:
-                maxIngredients = 6;
+                maxIngredients = 4;
                 break;
 
+            default:
             case 5:
-                maxIngredients = 7;
+                maxIngredients = ingredients.Length;
                 break;
         }
 
         return maxIngredients;
+    }
+    IEnumerator WaitForDestroy()
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
     }
 }

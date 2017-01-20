@@ -7,9 +7,11 @@ public class OrderManager : MonoBehaviour
 
     public GameObject orderSlip;
 
+  //  RectTransform parentTransform;
 
     [HideInInspector] public float orderSpawnTime;
     [HideInInspector] public int levelOnCreation;
+    [HideInInspector] public float speedOnCreation;
 
 
     void Start()
@@ -19,23 +21,30 @@ public class OrderManager : MonoBehaviour
 
     void StartOrderingLoop()
     {
-        orderSpawnTime = CalculateSpawnTime();
         levelOnCreation = CalculateLevel();
+        orderSpawnTime = CalculateSpawnTime(levelOnCreation);
+        speedOnCreation = CalculateSpeed(levelOnCreation);
         StartCoroutine("CreateOrder");
     }
 
     IEnumerator CreateOrder()
     {
-        Instantiate(orderSlip);
 
-        yield return new WaitForSeconds(orderSpawnTime);
+        // Erstellt den order Slip
+        (Instantiate(orderSlip, transform.position, transform.rotation) as GameObject).transform.parent = this.transform;
+
+         yield return new WaitForSeconds(orderSpawnTime);
 
         StartOrderingLoop();
     }
 
-     float CalculateSpawnTime()
+     float CalculateSpawnTime(int level)
         {
-         float spawnTime = Random.Range(5F, 10F);
+        float thisLevel = level;
+        float min = 5F / (level +1);
+        float max = 10F / (level +1);
+
+         float spawnTime = Random.Range(min, max);
 
          return spawnTime;
         }
@@ -51,5 +60,16 @@ public class OrderManager : MonoBehaviour
         Mathf.Clamp(level, 0, 5);
 
         return level;
+    }
+
+    float CalculateSpeed(int level)
+    {
+        float thisLevel = level;
+
+        float groundspeed = 1;
+
+        groundspeed += thisLevel;
+
+        return groundspeed;
     }
 }
