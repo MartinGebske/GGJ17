@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SqueezeBottle : MonoBehaviour
+public class SqueezeBottle : MonoBehaviour, ISelectable
 {
     [Header("Config")]
     public SqueezeLine SqueezeLinePrefab;
@@ -13,14 +14,17 @@ public class SqueezeBottle : MonoBehaviour
     private SqueezeLine CurrentSqueezeLine;
     private List<Vector3> CurrentPoints = new List<Vector3>();
 
-    private bool m_isSelected = true; // DEBUG: should start with false later and be set in SelectionManager
+    private bool m_isSelected = false;
     public bool IsSelected { get { return m_isSelected; } set { m_isSelected = value; } }
 
     private ParticleSystem m_ParticleSystem;
+    private Vector3 m_StartPos;
+    private bool m_PreventSpill = false;
 
     private void Start()
     {
         m_ParticleSystem = GetComponentInChildren<ParticleSystem>();
+        m_StartPos = transform.position;
     }
 
     private void Update()
@@ -36,7 +40,7 @@ public class SqueezeBottle : MonoBehaviour
             }
 
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !m_PreventSpill)
             {
                 // create the SqueezeLine object
                 CurrentSqueezeLine = Instantiate<SqueezeLine>(SqueezeLinePrefab);
@@ -48,8 +52,10 @@ public class SqueezeBottle : MonoBehaviour
             {
                 // end particle effect
                 m_ParticleSystem.Stop();
+
+                m_PreventSpill = false;
             }
-            else if (Input.GetMouseButton(0))
+            else if (Input.GetMouseButton(0) && !m_PreventSpill)
             {
                 // raycast from bottle to bottom 
                 if (Physics.Raycast(transform.position, Vector3.down, out hit))
@@ -89,5 +95,20 @@ public class SqueezeBottle : MonoBehaviour
     {
         CurrentPoints = new List<Vector3>();
         CurrentSqueezeLine = null;
+    }
+
+    public void Select()
+    {
+        // waits until mousebuttonUp for actually squeezing out stuff
+        m_PreventSpill = true;
+
+        IsSelected = true;
+    }
+
+    public void Unselect()
+    {
+        IsSelected = false;
+        transform.position = m_StartPos;
+        m_PreventSpill = false;
     }
 }

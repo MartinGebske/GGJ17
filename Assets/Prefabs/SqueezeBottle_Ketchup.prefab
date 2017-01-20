@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4301397216993238}
   - component: {fileID: 114074147455471782}
+  - component: {fileID: 136907727833123730}
   m_Layer: 0
   m_Name: SqueezeBottle_Ketchup
   m_TagString: Untagged
@@ -53,7 +54,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4057506901962018}
   - component: {fileID: 33762977155400842}
-  - component: {fileID: 136969387163011486}
   - component: {fileID: 23056227930239360}
   m_Layer: 0
   m_Name: Cylinder
@@ -95,7 +95,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1260306466898396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.39, y: 6.83, z: 1.23}
+  m_LocalPosition: {x: 6.333286, y: 2.98, z: 3.7327156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4057506901962018}
@@ -156,12 +156,12 @@ MonoBehaviour:
     type: 2}
   PointsMinDistance: 0.15
   UpOffset: 3
---- !u!136 &136969387163011486
+--- !u!136 &136907727833123730
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1853815356275824}
+  m_GameObject: {fileID: 1260306466898396}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -224,7 +224,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1496485306
+  randomSeed: -58084762
   InitialModule:
     serializedVersion: 3
     enabled: 1
