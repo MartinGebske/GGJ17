@@ -14,8 +14,9 @@ public class Order : MonoBehaviour
     public float endposition;
 
     public AudioClip guestHappySound;
-    public AudioClip guestAngrySound; 
-   
+    public AudioClip guestAngrySound;
+
+    public Sprite[] zettelImages;
 
    // [HideInInspector] public int currentLevel;
     [HideInInspector] public int currentIngredients;
@@ -25,10 +26,15 @@ public class Order : MonoBehaviour
 
     private OrderManager orderManager;
 
-    RectTransform orderTransform;
+    private RectTransform orderTransform;
+
+    private SpriteRenderer sprRenderer;
 
     void Start ()
     {
+
+        sprRenderer = GetComponent<SpriteRenderer>();
+
         orderTransform = GetComponent<RectTransform>();
 
         orderManager = FindObjectOfType<OrderManager>();
@@ -39,7 +45,10 @@ public class Order : MonoBehaviour
 
         currentIngredients = CalculateMaxIngredients(currentLevel);
 
+        SelectBackgroundSprite();
+
         FillIngredients();
+
         SelectSauce();
     }
 
@@ -49,6 +58,7 @@ public class Order : MonoBehaviour
 
         if (orderTransform.anchoredPosition.x > endposition)
         { GuestIsAngry(); }
+
     }
 
     public void GuestIsHappy()
@@ -59,9 +69,14 @@ public class Order : MonoBehaviour
 
     public void GuestIsAngry()
     {
-        Debug.Log("Bestellung nicht ausgeführt!!!");
         audioSource.PlayOneShot(guestAngrySound);
         StartCoroutine(WaitForDestroy());
+    }
+
+    void SelectBackgroundSprite()
+    {
+        int select = Random.Range(1, 2);
+        sprRenderer.sprite = zettelImages[select];
     }
 
     void FillIngredients()

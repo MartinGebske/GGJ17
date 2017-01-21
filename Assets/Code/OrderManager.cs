@@ -20,7 +20,7 @@ public class OrderManager : MonoBehaviour
         StartOrderingLoop();
     }
 
-    void StartOrderingLoop()
+    public void StartOrderingLoop()
     {
         levelOnCreation = CalculateLevel();
         orderSpawnTime = CalculateSpawnTime(levelOnCreation);
