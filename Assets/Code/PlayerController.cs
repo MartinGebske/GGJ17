@@ -76,6 +76,35 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
 
             m_HotDogObject = Instantiate<GameObject>(HotDogPrefab, HotDogSpawn);
 
+            // Ingredients: set the validation counts
+            IngrCheese.SetValidation(m_SelectedOrder.GetIngredientCount(IngredientObject.IngredientType.Cheese));
+            IngrCucumber.SetValidation(m_SelectedOrder.GetIngredientCount(IngredientObject.IngredientType.Cucumber));
+            IngrOnion.SetValidation(m_SelectedOrder.GetIngredientCount(IngredientObject.IngredientType.Onion));
+            IngrTomato.SetValidation(m_SelectedOrder.GetIngredientCount(IngredientObject.IngredientType.Tomato));
+
+
+            // Bottles: set whether it is active and a random state
+            if (m_SelectedOrder.GetSqueezeBottleActive(SqueezeBottle.SqueezeBottleType.Ketchup))
+            {
+                BottleKetchup.SetValidation(Random.Range(1, 6));
+            }
+            else
+                BottleKetchup.SetValidation(0);
+
+            if (m_SelectedOrder.GetSqueezeBottleActive(SqueezeBottle.SqueezeBottleType.Mustard))
+            {
+                BottleMustard.SetValidation(Random.Range(1, 6));
+            }
+            else
+                BottleMustard.SetValidation(0);
+
+            if (m_SelectedOrder.GetSqueezeBottleActive(SqueezeBottle.SqueezeBottleType.Chocolate))
+            {
+                BottleChocolate.SetValidation(Random.Range(1, 6));
+            }
+            else
+                BottleChocolate.SetValidation(0);
+
             return true;
         }
         else
@@ -87,6 +116,7 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
     public void OnFinishHotDogClicked()
     {
         // TODO validate the m_SelectedOrder with our hot dog
+        Debug.LogWarning("Final Score: " + GetFinalScore());
 
         m_SelectedOrder.GuestIsAngry();
 
@@ -107,5 +137,54 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
         BottleChocolate.Reset();
         BottleKetchup.Reset();
         BottleMustard.Reset();
+    }
+
+    private float GetFinalScore()
+    {
+        float scoreSum = 0.0f; int scoreCounts = 0;
+
+        /* Ingredients */
+        if (IngrCheese.IsValidationActive())
+        {
+            scoreSum += IngrCheese.GetScore();
+            scoreCounts++;
+        }
+        if (IngrCucumber.IsValidationActive())
+        {
+            scoreSum += IngrCucumber.GetScore();
+            scoreCounts++;
+        }
+        if (IngrOnion.IsValidationActive())
+        {
+            scoreSum += IngrOnion.GetScore();
+            scoreCounts++;
+        }
+        if (IngrTomato.IsValidationActive())
+        {
+            scoreSum += IngrTomato.GetScore();
+            scoreCounts++;
+        }
+
+        /* Bottles */
+        if (BottleChocolate.IsValidationActive())
+        {
+            scoreSum += BottleChocolate.GetScore();
+            scoreCounts++;
+        }
+        if (BottleKetchup.IsValidationActive())
+        {
+            scoreSum += BottleKetchup.GetScore();
+            scoreCounts++;
+        }
+        if (BottleMustard.IsValidationActive())
+        {
+            scoreSum += BottleMustard.GetScore();
+            scoreCounts++;
+        }
+
+        if (scoreCounts <= 0)
+            return 0.0f;
+        else
+            return scoreSum / (1.0f * scoreCounts);
     }
 }

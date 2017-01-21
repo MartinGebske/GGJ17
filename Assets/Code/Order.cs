@@ -32,6 +32,8 @@ public class Order : MonoBehaviour, IPointerClickHandler
 
     private SpriteRenderer sprRenderer;
 
+    private bool reachedEndPos = false;
+
     void Start ()
     {
 
@@ -58,8 +60,11 @@ public class Order : MonoBehaviour, IPointerClickHandler
     {
         orderTransform.Translate(Vector3.right * orderManager.speedOnCreation * Time.deltaTime);
 
-        if (orderTransform.anchoredPosition.x > endposition)
-        { GuestIsAngry(); }
+        if (!reachedEndPos && orderTransform.anchoredPosition.x > endposition)
+        {
+            PlayerController.Instance.OnFinishHotDogClicked();
+            reachedEndPos = true;
+        }
 
     }
 
@@ -173,11 +178,64 @@ public class Order : MonoBehaviour, IPointerClickHandler
         // TODO feedback (highlight OR "no access")
         if (wasSelected)
         {
-
+            GetComponent<SpriteRenderer>().color = new Color(0.0f, 1.0f, 86.0f / 255.0f);
         }
         else
         {
 
+        }
+    }
+
+    public int GetIngredientCount(IngredientObject.IngredientType OfType)
+    {
+        int count = 0;
+
+        switch (OfType)
+        {
+            case IngredientObject.IngredientType.Tomato:
+                if (ingredients[3].activeSelf) count++;
+                if (ingredients[4].activeSelf) count++;
+                if (ingredients[5].activeSelf) count++;
+                break;
+            case IngredientObject.IngredientType.Cucumber:
+                if (ingredients[0].activeSelf) count++;
+                if (ingredients[1].activeSelf) count++;
+                if (ingredients[2].activeSelf) count++;
+                break;
+            case IngredientObject.IngredientType.Cheese:
+                if (ingredients[6].activeSelf) count++;
+                if (ingredients[7].activeSelf) count++;
+                if (ingredients[8].activeSelf) count++;
+                break;
+            case IngredientObject.IngredientType.Onion:
+                if (ingredients[9].activeSelf) count++;
+                if (ingredients[10].activeSelf) count++;
+                if (ingredients[11].activeSelf) count++;
+                break;
+            case IngredientObject.IngredientType.Banana:
+                if (ingredients[12].activeSelf) count++;
+                if (ingredients[13].activeSelf) count++;
+                if (ingredients[14].activeSelf) count++;
+                break;
+            default:
+                break;
+        }
+
+        return count;
+    }
+
+    public bool GetSqueezeBottleActive(SqueezeBottle.SqueezeBottleType OfType)
+    {
+        switch (OfType)
+        {
+            case SqueezeBottle.SqueezeBottleType.Ketchup:
+                return sauces[0].activeSelf;
+            case SqueezeBottle.SqueezeBottleType.Mustard:
+                return sauces[1].activeSelf;
+            case SqueezeBottle.SqueezeBottleType.Chocolate:
+                return sauces[2].activeSelf;
+            default:
+                return false;
         }
     }
 }

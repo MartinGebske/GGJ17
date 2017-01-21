@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e1df968f29efc458475449290684a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeOfIngredient: 0
+  TypeOfIngredient: 2
   IngredientSlicePrefab: {fileID: 1072303989714272, guid: 4263a2b6835498b448e74e891d70bfbc,
     type: 2}
   UpOffset: 2

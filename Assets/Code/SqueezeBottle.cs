@@ -6,7 +6,15 @@ using UnityEngine;
 
 public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
 {
+    public enum SqueezeBottleType
+    {
+        Ketchup,
+        Mustard,
+        Chocolate
+    }
+
     [Header("Config")]
+    public SqueezeBottleType TypeOfSqueezeBottle;
     public SqueezeLine SqueezeLinePrefab;
     public SqueezeLine SqueezeLineValidationPrefab;
 
@@ -113,7 +121,8 @@ public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
     {
         yield return new WaitForSeconds(SqueezeDelaySeconds);
 
-        toLine.AddNewPoint(point);
+        if (toLine != null)
+            toLine.AddNewPoint(point);
     }
 
     private bool IsPointFurtherAway(Vector3 Point)

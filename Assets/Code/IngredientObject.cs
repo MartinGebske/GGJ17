@@ -7,7 +7,10 @@ public class IngredientObject : MonoBehaviour, ISelectable, IValidatable
     public enum IngredientType
     {
         Tomato,
-        Cucumber
+        Cucumber,
+        Cheese,
+        Onion,
+        Banana
     }
 
     [Header("Config")]
@@ -93,7 +96,7 @@ public class IngredientObject : MonoBehaviour, ISelectable, IValidatable
 
         if (diff == 0)
             return 100.0f;
-        else if (diff == 1)
+        else if (diff == 1 && ValidationPlacedSlices.Count > 0)
             return 50.0f;
         else
             return 0.0f;

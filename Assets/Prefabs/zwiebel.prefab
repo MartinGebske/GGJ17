@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e1df968f29efc458475449290684a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeOfIngredient: 0
+  TypeOfIngredient: 3
   IngredientSlicePrefab: {fileID: 1846126984005044, guid: b6f6e067f63287c4baffef8c9a5c2dca,
     type: 2}
   UpOffset: 2

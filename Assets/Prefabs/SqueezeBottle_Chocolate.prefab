@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd61a52c5ada854db60d51acbee7aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TypeOfSqueezeBottle: 2
   SqueezeLinePrefab: {fileID: 114728818687691972, guid: c7632a0829cc09f43ac79382f0168f96,
     type: 2}
   SqueezeLineValidationPrefab: {fileID: 114728818687691972, guid: d543c1eba8315394ea807559075fb3b2,
@@ -180,8 +181,7 @@ MonoBehaviour:
   SqueezeDelaySeconds: 0.2
   ValidationOffset: {x: -7.5, y: 1.8, z: -3}
   UsesSine: 0
-  ValidationX: 1
-  ValidationY: 1
+  UsesSineOffset: 0
 --- !u!136 &136954300027054364
 CapsuleCollider:
   m_ObjectHideFlags: 1
