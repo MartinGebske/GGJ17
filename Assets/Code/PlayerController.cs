@@ -8,8 +8,9 @@ public interface ISelectable
 
 public interface IValidatable
 {
-    float GetScore(); // 100.0 is perfect, 0.0 is bad
-    void SetValidation(int Val); // set the validation for this hot dog
+    float GetScore(); // 100.0 is perfect, 0.0 is bad.
+    void SetValidation(int Val); // set the validation for this hot dog. 0 is inactive
+    bool IsValidationActive();
 }
 
 public class PlayerController : MonoBehaviour

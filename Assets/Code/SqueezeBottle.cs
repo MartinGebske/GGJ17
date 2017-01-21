@@ -34,6 +34,7 @@ public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
     // -> 0 ist ein strich, 1 ist kurvig
 
     private SqueezeLine valSqueezeLine;
+    private bool valActive = false;
 
     private void Start()
     {
@@ -180,31 +181,39 @@ public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
 
     public void SetValidation(int Val)
     {
+        valActive = Val > 0; // 0 means inactive for this hot dog
+
         switch(Val)
         {
-            case 0:
+            case 1:
                 ValidationX = 1.0f;
                 ValidationY = 1.0f; 
                 break;
-            case 1:
+            case 2:
                 ValidationX = 4.0f;
                 ValidationY = 1.0f;
                 break;
-            case 2:
+            case 3:
                 ValidationX = 1.0f;
                 ValidationY = 0.5f;
                 break;
-            case 3:
+            case 4:
                 ValidationX = 1.5f;
                 ValidationY = 1.0f;
                 break;
             default:
-            case 4:
+            case 5:
                 ValidationX = 2.0f;
                 ValidationY = 0.5f;
                 break;
         }
 
-        ShowValidationWave();
+        if (valActive)
+            ShowValidationWave();
+    }
+
+    public bool IsValidationActive()
+    {
+        return valActive;
     }
 }

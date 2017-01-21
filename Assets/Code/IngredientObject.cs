@@ -103,4 +103,9 @@ public class IngredientObject : MonoBehaviour, ISelectable, IValidatable
     {
         ValidationCount = Val;
     }
+
+    public bool IsValidationActive()
+    {
+        return ValidationCount > 0;
+    }
 }
