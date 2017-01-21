@@ -54,6 +54,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4186364367400226}
   - component: {fileID: 114216628409411216}
+  - component: {fileID: 135144310725177192}
   m_Layer: 0
   m_Name: tomate
   m_TagString: Untagged
@@ -68,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1915303410698340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 1.06, z: 4.12}
+  m_LocalPosition: {x: 3.0616455, y: 1.5, z: 3.9948702}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4528317471379240}
@@ -193,3 +194,16 @@ MonoBehaviour:
   IngredientSlicePrefab: {fileID: 1190995768131086, guid: c11a635be61fe31418ed0ed8b63e05d5,
     type: 2}
   UpOffset: 2
+  RotOffset: {x: 80, y: 270, z: 270}
+--- !u!135 &135144310725177192
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1915303410698340}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.22
+  m_Center: {x: 0, y: 0, z: 0}

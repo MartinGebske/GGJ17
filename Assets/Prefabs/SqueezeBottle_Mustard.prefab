@@ -70,8 +70,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1260306466898396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9889112, y: 1.15, z: 5.0529814}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 8.84, y: 1.74, z: 3.27}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4962088588108438}
   - {fileID: 4993539007459208}
@@ -176,8 +176,8 @@ MonoBehaviour:
   SqueezeLineValidationPrefab: {fileID: 114728818687691972, guid: 61142e6bcdfa41f49aee451bd8c4eedb,
     type: 2}
   PointsMinDistance: 0.15
-  UpOffset: 3
-  SqueezeDelaySeconds: 0.15
+  UpOffset: 5
+  SqueezeDelaySeconds: 0.2
   ValidationOffset: {x: -5, y: 2, z: 0}
   ValidationSineX: 1
   ValidationSineY: 1

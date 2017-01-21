@@ -13,6 +13,7 @@ public class IngredientObject : MonoBehaviour, ISelectable
     public IngredientType TypeOfIngredient;
     public GameObject IngredientSlicePrefab;
     public float UpOffset = 2.0f;
+    public Vector3 RotOffset = new Vector3();
 
     private bool m_isSelected = false;
     public bool IsSelected { get { return m_isSelected; } set { m_isSelected = value; } }
@@ -39,7 +40,10 @@ public class IngredientObject : MonoBehaviour, ISelectable
                     Instantiate<GameObject>(
                         IngredientSlicePrefab, 
                         hit.point, 
-                        Quaternion.Euler(UnityEngine.Random.Range(70.0f,90.0f), 270.0f, 0.0f));
+                        Quaternion.Euler(
+                            RotOffset.x + UnityEngine.Random.Range(-15.0f, 15.0f), 
+                            RotOffset.y, 
+                            RotOffset.z + UnityEngine.Random.Range(-15.0f, 15.0f)));
                 }
             }
         }

@@ -24,6 +24,7 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
     private ParticleSystem m_ParticleSystem;
     private Vector3 m_StartPos;
     private bool m_PreventSpill = false;
+    private bool m_WasMissingTable = false;
 
 
     public float ValidationSineX = 1.0f; // kleiner streckt die kurve in die Länge | größer macht mehr intervalle
@@ -78,8 +79,15 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
             else if (Input.GetMouseButton(0) && !m_PreventSpill)
             {
                 // raycast from bottle to bottom 
-                if (Physics.Raycast(transform.position, Vector3.down, out hit))
+                ray = new Ray(transform.position, Vector3.down);
+                if (Physics.Raycast(ray, out hit, 1000.0f, 1 << 0))
                 {
+                    if (m_WasMissingTable)
+                    {
+                        CurrentSqueezeLine = Instantiate<SqueezeLine>(SqueezeLinePrefab);
+                        m_WasMissingTable = false;
+                    }
+
                     // check if current raycast target is further away from any currentPoints than minDistance
                     if (IsPointFurtherAway(hit.point))
                     {
@@ -88,6 +96,10 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
                         StartCoroutine(AddNewPoint(CurrentSqueezeLine, hit.point));
                         //CurrentSqueezeLine.AddNewPoint(hit.point);
                     }
+                }
+                else
+                {
+                    m_WasMissingTable = true;
                 }
             }
         }        
@@ -115,6 +127,7 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
     {
         CurrentPoints = new List<Vector3>();
         CurrentSqueezeLine = null;
+        m_WasMissingTable = false;
 
         SqueezeLine[] allLines = FindObjectsOfType<SqueezeLine>();
         foreach (SqueezeLine line in allLines)
@@ -131,6 +144,7 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
         IsSelected = true;
 
         transform.Rotate(Vector3.forward, 180.0f);
+        GetComponent<Collider>().enabled = false;
     }
 
     public void Unselect()
@@ -138,9 +152,11 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
         IsSelected = false;
         transform.position = m_StartPos;
         m_PreventSpill = false;
+        m_WasMissingTable = false;
         m_ParticleSystem.Stop();
 
         transform.Rotate(Vector3.forward, -180.0f);
+        GetComponent<Collider>().enabled = true;
     }
 
 
