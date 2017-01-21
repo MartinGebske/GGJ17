@@ -6,6 +6,12 @@ public interface ISelectable
     void Unselect();
 }
 
+public interface IValidatable
+{
+    float GetScore(); // 100.0 is perfect, 0.0 is bad
+    void SetValidation(int Val); // set the validation for this hot dog
+}
+
 public class PlayerController : MonoBehaviour
 {
     private ISelectable m_SelectedObject;

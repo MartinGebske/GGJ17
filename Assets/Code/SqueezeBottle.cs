@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SqueezeBottle : MonoBehaviour, ISelectable
+public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
 {
     [Header("Config")]
     public SqueezeLine SqueezeLinePrefab;
@@ -14,6 +14,7 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
     public float UpOffset = 2.0f;
     public float SqueezeDelaySeconds = 0.15f;
     public Vector3 ValidationOffset = new Vector3(-5.0f, 2.0f, 0.0f);
+    public bool UsesSine = true;
 
     private SqueezeLine CurrentSqueezeLine;
     private List<Vector3> CurrentPoints = new List<Vector3>();
@@ -26,10 +27,10 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
     private bool m_PreventSpill = false;
     private bool m_WasMissingTable = false;
 
+    /* For Validation */
+    public float ValidationX = 1.0f; // kleiner streckt die kurve in die Länge | größer macht mehr intervalle
 
-    public float ValidationSineX = 1.0f; // kleiner streckt die kurve in die Länge | größer macht mehr intervalle
-
-    public float ValidationSineY = 1.0f; // kleiner macht kleinere Kurven | größer größere Kurven
+    public float ValidationY = 1.0f; // kleiner macht kleinere Kurven | größer größere Kurven
     // -> 0 ist ein strich, 1 ist kurvig
 
     private SqueezeLine valSqueezeLine;
@@ -47,8 +48,8 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
             Reset();
         if (Input.GetKeyDown(KeyCode.T))
             ShowValidationWave();
-        if (Input.GetKeyDown(KeyCode.Z))
-            Debug.Log(valSqueezeLine.GetTotalDeviation(CurrentPoints));
+        if (Input.GetKeyDown(KeyCode.S))
+            Debug.Log("Score: " + GetScore());
 
         // handle movement here when it is selected
         if (IsSelected)
@@ -80,7 +81,7 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
             {
                 // raycast from bottle to bottom 
                 ray = new Ray(transform.position, Vector3.down);
-                if (Physics.Raycast(ray, out hit, 1000.0f, 1 << 0))
+                if (Physics.Raycast(ray, out hit, 1000.0f, ~(1 << 10)))
                 {
                     if (m_WasMissingTable)
                     {
@@ -166,7 +167,42 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
 
         for (float i = 0.0f; i < 10.0f; i+=0.1f)
         {
-            valSqueezeLine.AddNewPoint(new Vector3(i, 0.0f, Mathf.Sin(i * ValidationSineX) * ValidationSineY) + ValidationOffset);
+            valSqueezeLine.AddNewPoint(
+                new Vector3(i, 0.0f, 
+                (UsesSine ? Mathf.Sin(i * ValidationX) : Mathf.Cos(i * ValidationX)) * ValidationY) + ValidationOffset);
+        }
+    }
+
+    public float GetScore()
+    {
+        return Mathf.Clamp(100.0f - valSqueezeLine.GetTotalDeviation(CurrentPoints), 0.0f, 100);
+    }
+
+    public void SetValidation(int Val)
+    {
+        switch(Val)
+        {
+            case 0:
+                ValidationX = 1.0f;
+                ValidationY = 1.0f; 
+                break;
+            case 1:
+                ValidationX = 4.0f;
+                ValidationY = 1.0f;
+                break;
+            case 2:
+                ValidationX = 1.0f;
+                ValidationY = 0.5f;
+                break;
+            case 3:
+                ValidationX = 1.5f;
+                ValidationY = 1.0f;
+                break;
+            default:
+            case 4:
+                ValidationX = 2.0f;
+                ValidationY = 0.5f;
+                break;
         }
     }
 }

@@ -178,9 +178,10 @@ MonoBehaviour:
   PointsMinDistance: 0.15
   UpOffset: 5
   SqueezeDelaySeconds: 0.2
-  ValidationOffset: {x: -5, y: 2, z: 0}
-  ValidationSineX: 1
-  ValidationSineY: 1
+  ValidationOffset: {x: -7.5, y: 2, z: -0.8}
+  UsesSine: 0
+  ValidationX: 1
+  ValidationY: 1
 --- !u!136 &136781839922876446
 CapsuleCollider:
   m_ObjectHideFlags: 1

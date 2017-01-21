@@ -1,7 +1,8 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class IngredientObject : MonoBehaviour, ISelectable
+public class IngredientObject : MonoBehaviour, ISelectable, IValidatable
 {
     public enum IngredientType
     {
@@ -20,6 +21,11 @@ public class IngredientObject : MonoBehaviour, ISelectable
 
     private GameObject m_CurrentSlice;
 
+    /* Validation */
+    public int ValidationCount = 2;
+
+    private List<GameObject> ValidationPlacedSlices = new List<GameObject>();
+
     private void Update()
     {
         // handle movement here when it is selected
@@ -37,13 +43,13 @@ public class IngredientObject : MonoBehaviour, ISelectable
                 if (Physics.Raycast(m_CurrentSlice.transform.position, Vector3.down, out hit))
                 {
                     // Put down ingredient slice
-                    Instantiate<GameObject>(
+                    ValidationPlacedSlices.Add(Instantiate<GameObject>(
                         IngredientSlicePrefab, 
                         hit.point, 
                         Quaternion.Euler(
                             RotOffset.x + UnityEngine.Random.Range(-15.0f, 15.0f), 
                             RotOffset.y, 
-                            RotOffset.z + UnityEngine.Random.Range(-15.0f, 15.0f)));
+                            RotOffset.z + UnityEngine.Random.Range(-15.0f, 15.0f))));
                 }
             }
         }
@@ -64,5 +70,31 @@ public class IngredientObject : MonoBehaviour, ISelectable
         IsSelected = false;
 
         Destroy(m_CurrentSlice);
+    }
+
+    private void Reset()
+    {
+        foreach(GameObject slice in ValidationPlacedSlices)
+        {
+            Destroy(slice);
+        }
+        ValidationPlacedSlices = new List<GameObject>();
+    }
+
+    public float GetScore()
+    {
+        int diff = Mathf.Abs(ValidationCount - ValidationPlacedSlices.Count);
+
+        if (diff == 0)
+            return 100.0f;
+        else if (diff == 1)
+            return 50.0f;
+        else
+            return 0.0f;
+    }
+
+    public void SetValidation(int Val)
+    {
+        ValidationCount = Val;
     }
 }
