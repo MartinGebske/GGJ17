@@ -431,6 +431,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orderSlip: {fileID: 1583725290412100, guid: 5245b57aeb6eb4e44a146d285ad3fe85, type: 2}
+  groundspeed: 0.1
+  minimumSpawnSpeed: 10
+  maximumSpawnSpeed: 20
   orderSpawnTime: 0
   levelOnCreation: 0
   speedOnCreation: 0

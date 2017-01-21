@@ -9,6 +9,8 @@ public class Order : MonoBehaviour
     [Tooltip("Welche Zutaten werden gebraucht?")]
     public GameObject[] ingredients;
 
+    public GameObject[] sauces;
+
     public float endposition;
 
     public AudioClip guestHappySound;
@@ -17,6 +19,7 @@ public class Order : MonoBehaviour
 
    // [HideInInspector] public int currentLevel;
     [HideInInspector] public int currentIngredients;
+  
 
     private AudioSource audioSource;
 
@@ -37,6 +40,7 @@ public class Order : MonoBehaviour
         currentIngredients = CalculateMaxIngredients(currentLevel);
 
         FillIngredients();
+        SelectSauce();
     }
 
     void Update()
@@ -76,6 +80,26 @@ public class Order : MonoBehaviour
         {
             chosenIng.Add(ingredients[i]);
             ingredients[i].SetActive(true);
+        }
+    }
+
+    void SelectSauce()
+    {
+        int sauceCount = Random.Range(1, 4);
+
+        List<int> sauceIndices = new List<int>();
+        while (sauceIndices.Count < sauceCount)
+        {
+            int i = Mathf.FloorToInt(Random.Range(0F, 1F) * (float)(sauces.Length));
+
+            if (!sauceIndices.Contains(i))
+            { sauceIndices.Add(i); }
+        }
+        List<GameObject> chosenSauces = new List<GameObject>();
+        foreach (int i in sauceIndices)
+        {
+            chosenSauces.Add(sauces[i]);
+            sauces[i].SetActive(true);
         }
     }
    
