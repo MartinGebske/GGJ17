@@ -7,6 +7,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
     [Header("Config")]
     public Scrollbar AngerMeter;
     public RectTransform Funke;
+    public Image AngryAttention;
     public RectTransform AngryTop;
     public RectTransform AngryBurnt;
     public Vector2 BurntXRange = new Vector2(-430f, -110f);
@@ -31,7 +32,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
     IEnumerator Start()
     {
         TxtTotalAmount.text = "0.00$";
-        TxtAddedAmount.text = "";
+        TxtAddedAmount.gameObject.SetActive(false);
         m_TextAddedStartPos = TxtAddedAmount.rectTransform.anchoredPosition;
 
         m_CanvasWidthHeight = new Vector2(GetComponent<RectTransform>().rect.width, GetComponent<RectTransform>().rect.width);
@@ -56,7 +57,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
         yield return new WaitForEndOfFrame();
 
         // DEBUGGING:
-        
+
         /*
         yield return new WaitForSeconds(1f);
         UpdateAngerMeter(0.5f);
@@ -71,6 +72,22 @@ public class UIManager : BitStrap.Singleton<UIManager>
 
     public void UpdateAngerMeter(float amount)
     {
+        LeanTween.value(gameObject, (float v) => { AngryAttention.color = new Color(1f, 1f, 1f, v); }, 0.0f, 1.0f, 1.0f)
+            .setEase(LeanTweenType.easeOutCubic)
+            .setOnComplete(() =>
+            {
+                LeanTween.value(gameObject, (float v) => { AngryAttention.color = new Color(1f, 1f, 1f, v); }, 1.0f, 0.0f, 1.0f)
+                    .setEase(LeanTweenType.easeInCubic);
+            });
+
+        LeanTween.value(gameObject, (float v) => { Funke.localScale = new Vector3(v,v); }, 1f, 10f, 1.0f)
+           .setEase(LeanTweenType.easeOutCubic)
+           .setOnComplete(() =>
+           {
+               LeanTween.value(gameObject, (float v) => { Funke.localScale = new Vector3(v, v); }, 10f, 1f, 1f)
+                   .setEase(LeanTweenType.easeInCubic);
+           });
+
         LeanTween.value(gameObject, ChangeAngerMeterSize, m_CurrentAngerMeterSize, amount, 1.5f)
             .setEase(LeanTweenType.easeOutCubic)
             .setOnComplete(() => { if (m_CurrentAngerMeterSize >= 1.0f) BlowUpSplash(); });
@@ -127,6 +144,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
 
     public void UpdateMoneyAmount(float AddedAmount, float NewTotalAmount)
     {
+        TxtAddedAmount.gameObject.SetActive(true);
         TxtAddedAmount.rectTransform.anchoredPosition = m_TextAddedStartPos;
 
         LeanTween.value(gameObject, ChangeTxtAddedAmount, 0f, AddedAmount / 10.0f, 1.5f)
@@ -135,7 +153,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
     }
     private void ChangeTxtAddedAmount(float value)
     {
-        TxtAddedAmount.text = "+ " + value.ToString("c2");
+        TxtAddedAmount.text = value.ToString("c2");
     }
     private void MoveTxtAddedOut(float newTotal)
     {
@@ -147,7 +165,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
     private void ChangeTxtTotalAmount(float value)
     {  
         TxtTotalAmount.text = value.ToString("c2");
-        TxtAddedAmount.text = "";
+        TxtAddedAmount.gameObject.SetActive(false);
     }
 
 

@@ -47,7 +47,11 @@ public class IngredientObject : MonoBehaviour, ISelectable, IValidatable
                 m_CurrentSlice.transform.position = hit.point + Vector3.up * UpOffset;
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (Physics.Raycast(ray, out hit) && hit.transform.GetComponent<MonoBehaviour>() is ISelectable)
+            {
+                // don't put down when we're selecting another ingredient right now
+            }
+            else if (Input.GetMouseButtonDown(0))
             {
                 if (Physics.Raycast(m_CurrentSlice.transform.position, Vector3.down, out hit))
                 {

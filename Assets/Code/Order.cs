@@ -34,6 +34,8 @@ public class Order : MonoBehaviour, IPointerClickHandler
 
     private bool reachedEndPos = false;
 
+    private int currentLevel = 0;
+
     void Start ()
     {
 
@@ -43,7 +45,7 @@ public class Order : MonoBehaviour, IPointerClickHandler
 
         orderManager = FindObjectOfType<OrderManager>();
 
-        int currentLevel = orderManager.levelOnCreation;
+        currentLevel = orderManager.levelOnCreation;
 
         audioSource = GetComponent<AudioSource>();
 
@@ -109,7 +111,9 @@ public class Order : MonoBehaviour, IPointerClickHandler
 
     void SelectSauce()
     {
-        int sauceCount = UnityEngine.Random.Range(1, 4);
+        int maxSauceCount = Mathf.Clamp(Mathf.FloorToInt(2f + (float)currentLevel / (float)3), 2, 4);
+        Debug.Log("MaxSauce: " + maxSauceCount);
+        int sauceCount = UnityEngine.Random.Range(1, maxSauceCount);
 
         List<int> sauceIndices = new List<int>();
         while (sauceIndices.Count < sauceCount)
