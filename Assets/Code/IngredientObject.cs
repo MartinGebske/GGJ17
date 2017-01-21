@@ -95,9 +95,9 @@ public class IngredientObject : MonoBehaviour, ISelectable, IValidatable
         int diff = Mathf.Abs(ValidationCount - ValidationPlacedSlices.Count);
 
         if (diff == 0)
-            return 100.0f;
+            return 40.0f;
         else if (diff == 1 && ValidationPlacedSlices.Count > 0)
-            return 50.0f;
+            return 20.0f;
         else
             return 0.0f;
     }

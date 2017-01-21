@@ -25,6 +25,7 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
     public IngredientObject IngrTomato;
     public IngredientObject IngrCheese;
     public IngredientObject IngrOnion;
+    public IngredientObject IngrBanana;
 
     [Space(5f)]
     public SqueezeBottle BottleKetchup;
@@ -81,6 +82,7 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
             IngrCucumber.SetValidation(m_SelectedOrder.GetIngredientCount(IngredientObject.IngredientType.Cucumber));
             IngrOnion.SetValidation(m_SelectedOrder.GetIngredientCount(IngredientObject.IngredientType.Onion));
             IngrTomato.SetValidation(m_SelectedOrder.GetIngredientCount(IngredientObject.IngredientType.Tomato));
+            IngrBanana.SetValidation(m_SelectedOrder.GetIngredientCount(IngredientObject.IngredientType.Banana));
 
 
             // Bottles: set whether it is active and a random state
@@ -133,6 +135,7 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
         IngrCucumber.Reset();
         IngrOnion.Reset();
         IngrTomato.Reset();
+        IngrBanana.Reset();
 
         BottleChocolate.Reset();
         BottleKetchup.Reset();
@@ -162,6 +165,11 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
         if (IngrTomato.IsValidationActive())
         {
             scoreSum += IngrTomato.GetScore();
+            scoreCounts++;
+        }
+        if (IngrBanana.IsValidationActive())
+        {
+            scoreSum += IngrBanana.GetScore();
             scoreCounts++;
         }
 
