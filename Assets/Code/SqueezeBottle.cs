@@ -138,6 +138,7 @@ public class SqueezeBottle : MonoBehaviour, ISelectable
         IsSelected = false;
         transform.position = m_StartPos;
         m_PreventSpill = false;
+        m_ParticleSystem.Stop();
 
         transform.Rotate(Vector3.forward, -180.0f);
     }
