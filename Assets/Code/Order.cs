@@ -166,6 +166,8 @@ public class Order : MonoBehaviour, IPointerClickHandler
     }
     IEnumerator WaitForDestroy()
     {
+        LeanTween.moveY(orderTransform, orderTransform.position.y + 200f, 1.0f)
+            .setEaseInCubic();
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }

@@ -21,6 +21,7 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
     public Transform HotDogSpawn;
     public GameObject HotDogPrefab;
     public float GuestHappyThreshold = 50.0f;
+    public int CountAngryUntilLost = 6;
 
     [Space(5f)]
     public IngredientObject IngrCucumber;
@@ -40,10 +41,15 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
     private GameObject m_HotDogObject;
 
     private List<float> m_Scores = new List<float>();
+    private int m_CountAngryCustomers = 0;
+
+    private float m_TotalMoney = 0.0f;
 
     private void Start()
     {
         BtnFinishHotDog.SetActive(false);
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene("main_ui", UnityEngine.SceneManagement.LoadSceneMode.Additive);
     }
 
     private void Update()
@@ -123,14 +129,28 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
 
     public void OnFinishHotDogClicked()
     {
-        // TODO validate the m_SelectedOrder with our hot dog
-        m_Scores.Add(GetFinalScore());
-        Debug.LogWarning("Final Score: " + m_Scores[m_Scores.Count - 1]);
+        // validate the m_SelectedOrder with our hot dog
+        if (m_SelectedOrder != null)
+        {
+            m_Scores.Add(GetFinalScore());
 
-        if (m_Scores[m_Scores.Count - 1] < GuestHappyThreshold)
-            m_SelectedOrder.GuestIsAngry();
-        else
-            m_SelectedOrder.GuestIsHappy();
+            m_TotalMoney += m_Scores[m_Scores.Count - 1] / 10.0f;
+            UIManager.Instance.UpdateMoneyAmount(m_Scores[m_Scores.Count - 1], m_TotalMoney);
+
+            if (m_Scores[m_Scores.Count - 1] < GuestHappyThreshold)
+            {
+                m_CountAngryCustomers++;
+                m_SelectedOrder.GuestIsAngry();
+
+                UIManager.Instance.UpdateAngerMeter((float)m_CountAngryCustomers / (float)CountAngryUntilLost);
+
+                // TODO check if we reached max angry customers and have ketchup explosion
+            }
+            else
+            {
+                m_SelectedOrder.GuestIsHappy();
+            }
+        }
 
         // Back to initial state
         ResetAll();
