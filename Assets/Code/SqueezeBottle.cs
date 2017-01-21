@@ -14,7 +14,6 @@ public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
     public float UpOffset = 2.0f;
     public float SqueezeDelaySeconds = 0.15f;
     public Vector3 ValidationOffset = new Vector3(-5.0f, 2.0f, 0.0f);
-    public bool UsesSine = true;
 
     private SqueezeLine CurrentSqueezeLine;
     private List<Vector3> CurrentPoints = new List<Vector3>();
@@ -28,9 +27,12 @@ public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
     private bool m_WasMissingTable = false;
 
     /* For Validation */
-    public float ValidationX = 1.0f; // kleiner streckt die kurve in die Länge | größer macht mehr intervalle
+    public bool UsesSine = true;
+    public float UsesSineOffset = 0.0f;
 
-    public float ValidationY = 1.0f; // kleiner macht kleinere Kurven | größer größere Kurven
+    private float ValidationX = 1.0f; // kleiner streckt die kurve in die Länge | größer macht mehr intervalle
+
+    private float ValidationY = 1.0f; // kleiner macht kleinere Kurven | größer größere Kurven
     // -> 0 ist ein strich, 1 ist kurvig
 
     private SqueezeLine valSqueezeLine;
@@ -170,7 +172,10 @@ public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
         {
             valSqueezeLine.AddNewPoint(
                 new Vector3(i, 0.0f, 
-                (UsesSine ? Mathf.Sin(i * ValidationX) : Mathf.Cos(i * ValidationX)) * ValidationY) + ValidationOffset);
+                (UsesSine ? 
+                Mathf.Sin(i * ValidationX + UsesSineOffset) : 
+                Mathf.Cos(i * ValidationX + UsesSineOffset)) 
+                * ValidationY) + ValidationOffset);
         }
     }
 

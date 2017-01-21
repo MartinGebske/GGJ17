@@ -7,8 +7,8 @@ public class OrderManager : MonoBehaviour
 
     public GameObject orderSlip;
     [Range(0,1)] public float groundspeed = 1F;
-    [Range(5, 10)] public float minimumSpawnSpeed = 1F;
-    [Range(15, 20)] public float maximumSpawnSpeed = 1F;
+    [Range(5, 50)] public float minimumSpawnSpeed = 1F;
+    [Range(15, 100)] public float maximumSpawnSpeed = 1F;
 
     [HideInInspector] public float orderSpawnTime;
     [HideInInspector] public int levelOnCreation;
