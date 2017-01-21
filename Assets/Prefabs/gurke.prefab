@@ -56,8 +56,8 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 33cdd250c52787843b90e953e630c91f, type: 2}
-  - {fileID: 2100000, guid: e4409cec7d65e9f4fa8bf0887ddc73eb, type: 2}
+  - {fileID: 2100000, guid: e330627b46df9624d86c1c077aed54a1, type: 2}
+  - {fileID: 2100000, guid: 4cfba96216d0d3a4db872b0f6e3b4ef3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,3 +112,4 @@ MonoBehaviour:
     type: 2}
   UpOffset: 2
   RotOffset: {x: 0, y: 180, z: 180}
+  ValidationCount: 2
