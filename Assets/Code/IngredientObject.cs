@@ -78,7 +78,7 @@ public class IngredientObject : MonoBehaviour, ISelectable, IValidatable
         Destroy(m_CurrentSlice);
     }
 
-    private void Reset()
+    public void Reset()
     {
         foreach(GameObject slice in ValidationPlacedSlices)
         {

@@ -13,9 +13,33 @@ public interface IValidatable
     bool IsValidationActive();
 }
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BitStrap.Singleton<PlayerController>
 {
+    [Header("Config")]
+    public GameObject BtnFinishHotDog;
+    public Transform HotDogSpawn;
+    public GameObject HotDogPrefab;
+
+    [Space(5f)]
+    public IngredientObject IngrCucumber;
+    public IngredientObject IngrTomato;
+    public IngredientObject IngrCheese;
+    public IngredientObject IngrOnion;
+
+    [Space(5f)]
+    public SqueezeBottle BottleKetchup;
+    public SqueezeBottle BottleMustard;
+    public SqueezeBottle BottleChocolate;
+
+
     private ISelectable m_SelectedObject;
+    private Order m_SelectedOrder;
+    private GameObject m_HotDogObject;
+
+    private void Start()
+    {
+        BtnFinishHotDog.SetActive(false);
+    }
 
     private void Update()
     {
@@ -40,5 +64,48 @@ public class PlayerController : MonoBehaviour
                 m_SelectedObject = null;
             }
         }
+    }
+
+
+    public bool OnOrderChosen(Order ChosenOrder)
+    {
+        if (m_SelectedOrder == null)
+        {
+            m_SelectedOrder = ChosenOrder;
+            BtnFinishHotDog.SetActive(true);
+
+            m_HotDogObject = Instantiate<GameObject>(HotDogPrefab, HotDogSpawn);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void OnFinishHotDogClicked()
+    {
+        // TODO validate the m_SelectedOrder with our hot dog
+
+        m_SelectedOrder.GuestIsAngry();
+
+        // Back to initial state
+        ResetAll();
+        Destroy(m_HotDogObject);
+        m_SelectedOrder = null;
+        BtnFinishHotDog.SetActive(false);
+    }
+
+    private void ResetAll()
+    {
+        IngrCheese.Reset();
+        IngrCucumber.Reset();
+        IngrOnion.Reset();
+        IngrTomato.Reset();
+
+        BottleChocolate.Reset();
+        BottleKetchup.Reset();
+        BottleMustard.Reset();
     }
 }

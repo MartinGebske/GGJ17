@@ -67,6 +67,7 @@ public class Order : MonoBehaviour, IPointerClickHandler
     {
         audioSource.PlayOneShot(guestHappySound);
         GameManager.GetInstance(true).orders++;
+        StartCoroutine(WaitForDestroy());
     }
 
     public void GuestIsAngry()
@@ -131,24 +132,29 @@ public class Order : MonoBehaviour, IPointerClickHandler
             break;
 
             case 1:
-                maxIngredients = 2;
-                break;
-
             case 2:
                 maxIngredients = 2;
                 break;
 
             case 3:
+            case 4:
+                maxIngredients = 3;
+                break;
+
+            case 5:
+            case 6:
                 maxIngredients = 4;
                 break;
 
-            case 4:
-                maxIngredients = 4;
+            case 7:
+            case 8:
+            case 9:
+                maxIngredients = 5;
                 break;
 
             default:
-            case 5:
-                maxIngredients = ingredients.Length;
+            case 10:
+                maxIngredients = ingredients.Length - 1;
                 break;
         }
 
@@ -162,6 +168,16 @@ public class Order : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.LogError("Was Clicked!");
+        bool wasSelected = PlayerController.Instance.OnOrderChosen(this);
+
+        // TODO feedback (highlight OR "no access")
+        if (wasSelected)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 }

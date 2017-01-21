@@ -9,6 +9,7 @@ public class OrderManager : MonoBehaviour
     [Range(0,10)] public float groundspeed = 1F;
     [Range(5, 50)] public float minimumSpawnSpeed = 1F;
     [Range(15, 100)] public float maximumSpawnSpeed = 1F;
+    public float secondsPerLevel = 10.0f;
 
     [HideInInspector] public float orderSpawnTime;
     [HideInInspector] public int levelOnCreation;
@@ -41,8 +42,8 @@ public class OrderManager : MonoBehaviour
      float CalculateSpawnTime(int level)
         {
         float thisLevel = level;
-        float min = minimumSpawnSpeed / (level +1);
-        float max = maximumSpawnSpeed / (level +1);
+        float min = minimumSpawnSpeed; /// (level +1);
+        float max = maximumSpawnSpeed; /// (level +1);
 
          float spawnTime = Random.Range(min, max);
 
@@ -53,11 +54,9 @@ public class OrderManager : MonoBehaviour
     {
         float currentTime = Time.timeSinceLevelLoad;
 
-        int roundedTime = Mathf.RoundToInt(currentTime);
+        int level = Mathf.FloorToInt(currentTime / secondsPerLevel);
 
-        int level = Mathf.FloorToInt(roundedTime / 10);
-
-        Mathf.Clamp(level, 0, 5);
+        level = Mathf.Clamp(level, 0, 10);
 
         Debug.Log("Aktuelles Level = " + level);
 
