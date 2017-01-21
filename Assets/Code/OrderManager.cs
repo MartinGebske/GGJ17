@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrderManager : MonoBehaviour
+public class OrderManager : BitStrap.Singleton<OrderManager>
 {
 
     public GameObject orderSlip;
     [Range(0,10)] public float groundspeed = 1F;
-    [Range(5, 50)] public float minimumSpawnSpeed = 1F;
-    [Range(5, 100)] public float maximumSpawnSpeed = 1F;
+    [Range(1, 50)] public float minimumSpawnSpeed = 1F;
+    [Range(1, 100)] public float maximumSpawnSpeed = 1F;
     public float secondsPerLevel = 10.0f;
 
     [HideInInspector] public float orderSpawnTime;
     [HideInInspector] public int levelOnCreation;
     [HideInInspector] public float speedOnCreation;
 
+    public bool StopSpawningOrders = false;
 
     void Start()
     {
@@ -31,12 +32,15 @@ public class OrderManager : MonoBehaviour
 
     IEnumerator CreateOrder()
     {
+        if (!StopSpawningOrders)
+        {
 
-       (Instantiate(orderSlip, transform.position, transform.rotation) as GameObject).transform.SetParent(this.transform, false);
- 
-        yield return new WaitForSeconds(orderSpawnTime);
+            (Instantiate(orderSlip, transform.position, transform.rotation) as GameObject).transform.SetParent(this.transform, false);
 
-        StartOrderingLoop();
+            yield return new WaitForSeconds(orderSpawnTime);
+
+            StartOrderingLoop();
+        }
     }
 
      float CalculateSpawnTime(int level)

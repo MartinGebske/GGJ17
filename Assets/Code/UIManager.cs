@@ -26,6 +26,8 @@ public class UIManager : BitStrap.Singleton<UIManager>
 
     private Vector2 m_CanvasWidthHeight;
 
+    private bool m_ShowingGameOverScreen = false;
+
     IEnumerator Start()
     {
         TxtTotalAmount.text = "0.00$";
@@ -86,6 +88,9 @@ public class UIManager : BitStrap.Singleton<UIManager>
 
     private void BlowUpSplash()
     {
+        if (m_ShowingGameOverScreen)
+            return;
+
         AngryTop.gameObject.SetActive(false);
         Funke.gameObject.SetActive(false);
 
@@ -101,6 +106,9 @@ public class UIManager : BitStrap.Singleton<UIManager>
 
     private void ShowGameOverScreen()
     {
+        m_ShowingGameOverScreen = true;
+        OrderManager.Instance.StopSpawningOrders = true;
+
         LeanTween.scale(ImgGameOver, Vector3.one * 1.5f, 1.0f)
             .setEase(LeanTweenType.easeOutElastic);
     }

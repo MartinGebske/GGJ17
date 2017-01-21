@@ -136,8 +136,11 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
         }
         else
         {
-            m_CountAngryCustomers++;
-            UIManager.Instance.UpdateAngerMeter((float)m_CountAngryCustomers / (float)CountAngryUntilLost);
+            if (m_CountAngryCustomers < CountAngryUntilLost)
+            {
+                m_CountAngryCustomers++;
+                UIManager.Instance.UpdateAngerMeter((float)m_CountAngryCustomers / (float)CountAngryUntilLost);
+            }
             return false;
         }
     }
