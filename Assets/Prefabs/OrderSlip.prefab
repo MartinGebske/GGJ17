@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 222837220779324668}
   - component: {fileID: 212985415281422044}
   m_Layer: 5
-  m_Name: Sauce (2)
+  m_Name: Sauce_Chocolate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,7 +471,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 67e384df163719a4894e999912b0d6cf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3e151f2c0ce40474b88f19e52a183555, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -611,7 +611,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: beaf8d9c7dbbf5942bc40e7d1468c01e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b7b95a0ac0ba0d64497b828835ba2a28, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -751,7 +751,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 4ea06d8ebe0c18b4a9cd1533096cb9bc, type: 3}
   m_Color: {r: 0.15862082, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
