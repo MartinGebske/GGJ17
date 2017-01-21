@@ -54,7 +54,7 @@ public class Order : MonoBehaviour
 
     void Update()
     {
-        orderTransform.Translate(Vector3.right * orderManager.speedOnCreation);
+        orderTransform.Translate(Vector3.right * orderManager.speedOnCreation * Time.deltaTime);
 
         if (orderTransform.anchoredPosition.x > endposition)
         { GuestIsAngry(); }

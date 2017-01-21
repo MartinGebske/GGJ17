@@ -363,7 +363,7 @@ MonoBehaviour:
   - {fileID: 1276159314634296}
   - {fileID: 1186984058682702}
   - {fileID: 1641586997104824}
-  endposition: 250
+  endposition: 350
   guestHappySound: {fileID: 0}
   guestAngrySound: {fileID: 0}
   zettelImages:
@@ -752,7 +752,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 4ea06d8ebe0c18b4a9cd1533096cb9bc, type: 3}
-  m_Color: {r: 0.15862082, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!222 &222055874161364814

@@ -54,7 +54,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4513210017150780}
-  - component: {fileID: 95163033297775132}
   m_Layer: 0
   m_Name: hotdog
   m_TagString: Untagged
@@ -334,23 +333,6 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: 9925be4f72eda4f4688a130b7a561bf8, type: 3}
---- !u!95 &95163033297775132
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1358187686204946}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 9925be4f72eda4f4688a130b7a561bf8, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!136 &136906197116181836
 CapsuleCollider:
   m_ObjectHideFlags: 1
