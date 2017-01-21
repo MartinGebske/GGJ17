@@ -10,6 +10,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
     public Image AngryAttention;
     public RectTransform AngryTop;
     public RectTransform AngryBurnt;
+    public GameObject AngryFaceAnimation;
     public Vector2 BurntXRange = new Vector2(-430f, -110f);
     public RectTransform Splash;
     public RectTransform ImgGameOver;
@@ -54,6 +55,8 @@ public class UIManager : BitStrap.Singleton<UIManager>
 
         ImgGameOver.localScale = Vector3.zero;
 
+        AngryFaceAnimation.SetActive(false);
+
         yield return new WaitForEndOfFrame();
 
         // DEBUGGING:
@@ -87,6 +90,8 @@ public class UIManager : BitStrap.Singleton<UIManager>
                LeanTween.value(gameObject, (float v) => { Funke.localScale = new Vector3(v, v); }, 10f, 1f, 1f)
                    .setEase(LeanTweenType.easeInCubic);
            });
+
+        AngryFaceAnimation.SetActive(true);
 
         LeanTween.value(gameObject, ChangeAngerMeterSize, m_CurrentAngerMeterSize, amount, 1.5f)
             .setEase(LeanTweenType.easeOutCubic)

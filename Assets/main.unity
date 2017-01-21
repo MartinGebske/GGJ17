@@ -683,10 +683,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orderSlip: {fileID: 1583725290412100, guid: 5245b57aeb6eb4e44a146d285ad3fe85, type: 2}
-  groundspeed: 0.6
+  groundspeed: 0.5
   minimumSpawnSpeed: 9
-  maximumSpawnSpeed: 14
-  secondsPerLevel: 20
+  maximumSpawnSpeed: 15
+  secondsPerLevel: 25
   orderSpawnTime: 0
   levelOnCreation: 0
   speedOnCreation: 0
@@ -2092,7 +2092,11 @@ MonoBehaviour:
   HotDogSpawn: {fileID: 358535577}
   HotDogPrefab: {fileID: 1358187686204946, guid: 6a2e2066e7d0b9b419d16201ea8f81e6,
     type: 2}
-  GuestHappyThreshold: 50
+  GuestHappyThresholdPerSauceCount:
+  - 0
+  - 20
+  - 35
+  - 50
   CountAngryUntilLost: 6
   IngrCucumber: {fileID: 1230386871}
   IngrTomato: {fileID: 1058747056}

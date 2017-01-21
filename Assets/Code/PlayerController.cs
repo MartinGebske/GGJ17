@@ -20,7 +20,7 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
     public GameObject BtnFinishHotDog;
     public Transform HotDogSpawn;
     public GameObject HotDogPrefab;
-    public float GuestHappyThreshold = 50.0f;
+    public float[] GuestHappyThresholdPerSauceCount;
     public int CountAngryUntilLost = 6;
 
     [Space(5f)]
@@ -155,14 +155,17 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
             m_TotalMoney += m_Scores[m_Scores.Count - 1] / 10.0f;
             UIManager.Instance.UpdateMoneyAmount(m_Scores[m_Scores.Count - 1], m_TotalMoney);
 
-            if (m_Scores[m_Scores.Count - 1] < GuestHappyThreshold)
+            int saucesActive = 0;
+            if (BottleChocolate.IsValidationActive()) saucesActive++;
+            if (BottleKetchup.IsValidationActive()) saucesActive++;
+            if (BottleMustard.IsValidationActive()) saucesActive++;
+
+            if (m_Scores[m_Scores.Count - 1] < GuestHappyThresholdPerSauceCount[saucesActive])
             {
                 m_CountAngryCustomers++;
                 m_SelectedOrder.GuestIsAngry();
 
                 UIManager.Instance.UpdateAngerMeter((float)m_CountAngryCustomers / (float)CountAngryUntilLost);
-
-                // TODO check if we reached max angry customers and have ketchup explosion
             }
             else
             {
@@ -192,7 +195,7 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
 
     private float GetFinalScore()
     {
-        float scoreSum = 0.0f; int scoreCounts = 0;
+        float scoreSum = 0.0f; float scoreCounts = 0f;
 
         /* Ingredients */
         if (IngrCheese.IsValidationActive())
@@ -222,25 +225,29 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
         }
 
         /* Bottles */
+        float bottleMod = 0f;
         if (BottleChocolate.IsValidationActive())
         {
             scoreSum += BottleChocolate.GetScore();
             scoreCounts++;
+            bottleMod += 0.2f;
         }
         if (BottleKetchup.IsValidationActive())
         {
             scoreSum += BottleKetchup.GetScore();
             scoreCounts++;
+            bottleMod += 0.2f;
         }
         if (BottleMustard.IsValidationActive())
         {
             scoreSum += BottleMustard.GetScore();
             scoreCounts++;
+            bottleMod += 0.2f;
         }
 
         if (scoreCounts <= 0)
             return 0.0f;
         else
-            return scoreSum / (1.0f * scoreCounts);
+            return scoreSum / (scoreCounts - bottleMod);
     }
 }
