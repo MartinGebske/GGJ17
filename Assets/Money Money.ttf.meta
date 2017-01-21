@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 40718d2154784954d83845384fc0e37d
+timeCreated: 1485024161
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Money Money
+  fontNames:
+  - Money Money
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
