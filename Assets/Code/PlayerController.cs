@@ -23,16 +23,13 @@ public class PlayerController : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit) && hit.transform.GetComponent<MonoBehaviour>() is ISelectable)
             {
-                if (hit.transform.GetComponent<MonoBehaviour>() is ISelectable)
-                {
-                    if (m_SelectedObject != null)
-                        m_SelectedObject.Unselect();
+                if (m_SelectedObject != null)
+                    m_SelectedObject.Unselect();
 
-                    m_SelectedObject = hit.transform.GetComponent<MonoBehaviour>() as ISelectable;
-                    m_SelectedObject.Select();
-                }
+                m_SelectedObject = hit.transform.GetComponent<MonoBehaviour>() as ISelectable;
+                m_SelectedObject.Select();
             }
         }
         else if (Input.GetMouseButtonDown(1))

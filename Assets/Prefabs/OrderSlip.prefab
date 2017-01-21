@@ -125,9 +125,8 @@ GameObject:
   - component: {fileID: 82559646545825060}
   - component: {fileID: 114507968385892486}
   - component: {fileID: 114192336329416438}
-  - component: {fileID: 61721249029436604}
-  - component: {fileID: 50189437073976610}
   - component: {fileID: 212313184349732046}
+  - component: {fileID: 61607535822596020}
   m_Layer: 5
   m_Name: OrderSlip
   m_TagString: Untagged
@@ -203,27 +202,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!50 &50189437073976610
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1583725290412100}
-  m_BodyType: 1
-  m_Simulated: 0
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!61 &61721249029436604
+--- !u!61 &61607535822596020
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

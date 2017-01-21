@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(AudioSource))]
-public class Order : MonoBehaviour
+public class Order : MonoBehaviour, IPointerClickHandler
 {
 
     [Tooltip("Welche Zutaten werden gebraucht?")]
@@ -75,7 +77,7 @@ public class Order : MonoBehaviour
 
     void SelectBackgroundSprite()
     {
-        int select = Random.Range(1, 2);
+        int select = UnityEngine.Random.Range(1, 2);
         sprRenderer.sprite = zettelImages[select];
     }
 
@@ -84,7 +86,7 @@ public class Order : MonoBehaviour
         List<int> generatedIndices = new List<int>();
         while(generatedIndices.Count < currentIngredients)
         {
-           int i = Mathf.FloorToInt (Random.Range(0F, 1F) * (float)(ingredients.Length));
+           int i = Mathf.FloorToInt (UnityEngine.Random.Range(0F, 1F) * (float)(ingredients.Length));
 
             if (!generatedIndices.Contains(i))
             { generatedIndices.Add(i); }
@@ -100,12 +102,12 @@ public class Order : MonoBehaviour
 
     void SelectSauce()
     {
-        int sauceCount = Random.Range(1, 4);
+        int sauceCount = UnityEngine.Random.Range(1, 4);
 
         List<int> sauceIndices = new List<int>();
         while (sauceIndices.Count < sauceCount)
         {
-            int i = Mathf.FloorToInt(Random.Range(0F, 1F) * (float)(sauces.Length));
+            int i = Mathf.FloorToInt(UnityEngine.Random.Range(0F, 1F) * (float)(sauces.Length));
 
             if (!sauceIndices.Contains(i))
             { sauceIndices.Add(i); }
@@ -156,5 +158,10 @@ public class Order : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.LogError("Was Clicked!");
     }
 }
