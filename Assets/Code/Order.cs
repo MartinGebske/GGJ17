@@ -179,7 +179,7 @@ public class Order : MonoBehaviour, IPointerClickHandler
         // TODO feedback (highlight OR "no access")
         if (wasSelected)
         {
-            GetComponent<SpriteRenderer>().color = new Color(0.0f, 1.0f, 86.0f / 255.0f);
+            GetComponent<SpriteRenderer>().color = new Color(206f, 1.0f, 215f / 255.0f);
         }
         else
         {
