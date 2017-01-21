@@ -51,6 +51,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
         yield return new WaitForEndOfFrame();
 
         // DEBUGGING:
+        /*
         yield return new WaitForSeconds(1f);
         UpdateAngerMeter(0.5f);
 
@@ -59,6 +60,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
 
         yield return new WaitForSeconds(1f);
         UpdateAngerMeter(1.0f);
+        */
     }
 
     public void UpdateAngerMeter(float amount)
