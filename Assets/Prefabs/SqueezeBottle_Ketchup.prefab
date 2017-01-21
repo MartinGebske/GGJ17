@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4841947975809452}
   - component: {fileID: 33771621644122828}
   - component: {fileID: 23603823579409428}
-  - component: {fileID: 95057093930001618}
   m_Layer: 0
   m_Name: bottle_red
   m_TagString: Untagged
@@ -82,15 +81,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1260306466898396}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.333286, y: 1.85, z: 3.7327156}
+  m_LocalRotation: {x: -0, y: 0.22747143, z: -0, w: 0.9737848}
+  m_LocalPosition: {x: 6.285774, y: 1.85, z: 10.44667}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4156252575362402}
   - {fileID: 4841947975809452}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 26.296001, z: 0}
 --- !u!4 &4841947975809452
 Transform:
   m_ObjectHideFlags: 1
@@ -143,23 +142,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1164234636835690}
   m_Mesh: {fileID: 4300000, guid: fa6f3ab41c9a19b4bae5e744b45dac06, type: 3}
---- !u!95 &95057093930001618
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1164234636835690}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: fa6f3ab41c9a19b4bae5e744b45dac06, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114074147455471782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd61a52c5ada854db60d51acbee7aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TypeOfSqueezeBottle: 0
   SqueezeLinePrefab: {fileID: 114728818687691972, guid: ebd17412e2882e245b3363047e49d5ef,
     type: 2}
   SqueezeLineValidationPrefab: {fileID: 114728818687691972, guid: bdf2f13b25e9bfe4baa991e1794d0c62,
@@ -178,10 +161,9 @@ MonoBehaviour:
   PointsMinDistance: 0.15
   UpOffset: 5
   SqueezeDelaySeconds: 0.2
-  ValidationOffset: {x: 0, y: 2, z: -1.5}
+  ValidationOffset: {x: -4.9, y: 2.6, z: -0.4}
   UsesSine: 1
-  ValidationX: 1
-  ValidationY: 1
+  UsesSineOffset: 0
 --- !u!136 &136907727833123730
 CapsuleCollider:
   m_ObjectHideFlags: 1

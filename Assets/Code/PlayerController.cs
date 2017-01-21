@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public interface ISelectable
@@ -19,6 +20,7 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
     public GameObject BtnFinishHotDog;
     public Transform HotDogSpawn;
     public GameObject HotDogPrefab;
+    public float GuestHappyThreshold = 50.0f;
 
     [Space(5f)]
     public IngredientObject IngrCucumber;
@@ -36,6 +38,8 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
     private ISelectable m_SelectedObject;
     private Order m_SelectedOrder;
     private GameObject m_HotDogObject;
+
+    private List<float> m_Scores = new List<float>();
 
     private void Start()
     {
@@ -75,7 +79,9 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
             m_SelectedOrder = ChosenOrder;
             BtnFinishHotDog.SetActive(true);
 
+            // Instantiate HotDog
             m_HotDogObject = Instantiate<GameObject>(HotDogPrefab, HotDogSpawn);
+            m_HotDogObject.transform.localPosition = Vector3.zero;
 
             // Ingredients: set the validation counts
             IngrCheese.SetValidation(m_SelectedOrder.GetIngredientCount(IngredientObject.IngredientType.Cheese));
@@ -118,9 +124,13 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
     public void OnFinishHotDogClicked()
     {
         // TODO validate the m_SelectedOrder with our hot dog
-        Debug.LogWarning("Final Score: " + GetFinalScore());
+        m_Scores.Add(GetFinalScore());
+        Debug.LogWarning("Final Score: " + m_Scores[m_Scores.Count - 1]);
 
-        m_SelectedOrder.GuestIsAngry();
+        if (m_Scores[m_Scores.Count - 1] < GuestHappyThreshold)
+            m_SelectedOrder.GuestIsAngry();
+        else
+            m_SelectedOrder.GuestIsHappy();
 
         // Back to initial state
         ResetAll();

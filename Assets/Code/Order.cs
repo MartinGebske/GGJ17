@@ -71,7 +71,6 @@ public class Order : MonoBehaviour, IPointerClickHandler
     public void GuestIsHappy()
     {
         audioSource.PlayOneShot(guestHappySound);
-        GameManager.GetInstance(true).orders++;
         StartCoroutine(WaitForDestroy());
     }
 
