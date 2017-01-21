@@ -11,6 +11,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
     public RectTransform AngryBurnt;
     public Vector2 BurntXRange = new Vector2(-430f, -110f);
     public RectTransform Splash;
+    public RectTransform ImgGameOver;
 
     [Space(5f)]
     public Text TxtTotalAmount;
@@ -48,9 +49,12 @@ public class UIManager : BitStrap.Singleton<UIManager>
         Splash.offsetMin = new Vector2(m_CanvasWidthHeight.x, 0.0f);
         Splash.offsetMax = new Vector2(0.0f, -m_CanvasWidthHeight.y);
 
+        ImgGameOver.localScale = Vector3.zero;
+
         yield return new WaitForEndOfFrame();
 
         // DEBUGGING:
+        
         /*
         yield return new WaitForSeconds(1f);
         UpdateAngerMeter(0.5f);
@@ -86,12 +90,19 @@ public class UIManager : BitStrap.Singleton<UIManager>
         Funke.gameObject.SetActive(false);
 
         LeanTween.value(gameObject, (float v) =>
-        { Splash.offsetMin = new Vector2(v, 0.0f); }, m_CanvasWidthHeight.x - 100f, 0.0f, 1.0f)
+        { Splash.offsetMin = new Vector2(v, 0.0f); }, m_CanvasWidthHeight.x - 100f, 0.0f, 0.5f)
            .setEase(LeanTweenType.easeOutCubic);
 
         LeanTween.value(gameObject, (float v) =>
-        { Splash.offsetMax = new Vector2(0.0f, v); }, -m_CanvasWidthHeight.y + 50f, 0.0f, 1.0f)
-            .setEase(LeanTweenType.easeOutCubic);
+        { Splash.offsetMax = new Vector2(0.0f, v); }, -m_CanvasWidthHeight.y + 50f, 0.0f, 0.5f)
+            .setEase(LeanTweenType.easeOutCubic)
+            .setOnComplete(ShowGameOverScreen);
+    }
+
+    private void ShowGameOverScreen()
+    {
+        LeanTween.scale(ImgGameOver, Vector3.one * 1.5f, 1.0f)
+            .setEase(LeanTweenType.easeOutElastic);
     }
 
     /* For Scrollbar
@@ -129,5 +140,15 @@ public class UIManager : BitStrap.Singleton<UIManager>
     {  
         TxtTotalAmount.text = value.ToString("c2");
         TxtAddedAmount.text = "";
+    }
+
+
+    public void OnTryAgainClicked()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("main", UnityEngine.SceneManagement.LoadSceneMode.Single);
+    }
+    public void OnBackToMainMenuClicked()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("start", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 }

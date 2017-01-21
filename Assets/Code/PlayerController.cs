@@ -127,6 +127,21 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
         }
     }
 
+    public bool OrderReachedEnd(Order order)
+    {
+        if (m_SelectedOrder == order)
+        {
+            OnFinishHotDogClicked();
+            return true;
+        }
+        else
+        {
+            m_CountAngryCustomers++;
+            UIManager.Instance.UpdateAngerMeter((float)m_CountAngryCustomers / (float)CountAngryUntilLost);
+            return false;
+        }
+    }
+
     public void OnFinishHotDogClicked()
     {
         // validate the m_SelectedOrder with our hot dog

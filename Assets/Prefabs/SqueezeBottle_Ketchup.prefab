@@ -160,7 +160,7 @@ MonoBehaviour:
     type: 2}
   PointsMinDistance: 0.15
   UpOffset: 5
-  SqueezeDelaySeconds: 0.2
+  SqueezeDelaySeconds: 0.15
   ValidationOffset: {x: -4.9, y: 2.6, z: -0.4}
   UsesSine: 1
   UsesSineOffset: 0
@@ -237,7 +237,7 @@ ParticleSystem:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 0.6
+      scalar: 0.4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -276,7 +276,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 10
+      scalar: 15
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -711,7 +711,7 @@ ParticleSystem:
     enabled: 1
     serializedVersion: 3
     rateOverTime:
-      scalar: 30
+      scalar: 50
       maxCurve:
         serializedVersion: 2
         m_Curve:

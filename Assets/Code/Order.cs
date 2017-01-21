@@ -62,7 +62,9 @@ public class Order : MonoBehaviour, IPointerClickHandler
 
         if (!reachedEndPos && orderTransform.anchoredPosition.x > endposition)
         {
-            PlayerController.Instance.OnFinishHotDogClicked();
+            if (!PlayerController.Instance.OrderReachedEnd(this))
+                GuestIsAngry();
+
             reachedEndPos = true;
         }
 
