@@ -49,7 +49,7 @@ public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
         if (Input.GetKeyDown(KeyCode.T))
             ShowValidationWave();
         if (Input.GetKeyDown(KeyCode.S))
-            Debug.Log("Score: " + GetScore());
+            Debug.Log(name + " Score: " + GetScore());
 
         // handle movement here when it is selected
         if (IsSelected)
@@ -204,5 +204,7 @@ public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
                 ValidationY = 0.5f;
                 break;
         }
+
+        ShowValidationWave();
     }
 }

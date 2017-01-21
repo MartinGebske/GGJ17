@@ -52,7 +52,7 @@ public class SqueezeLine : MonoBehaviour
         }
 
         // in order for FromPoints.Count == 0 not be 0 Deviation, have this 100 std deviation
-        return Mathf.Clamp(100.0f - FromPoints.Count, 0.0f, 100.0f) + finalDeviation / (FromPoints.Count + 1);
+        return Mathf.Clamp(100.0f - FromPoints.Count, 0.0f, 100.0f) + finalDeviation;
     }
 
     private void UpdateMesh()
