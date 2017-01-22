@@ -31,6 +31,7 @@ public class HighscoreEntry : MonoBehaviour
             m_RectTrans.sizeDelta = new Vector2(v, m_RectTrans.sizeDelta.y);
         }, 0f, 1000f, 0.8f)
             .setEase(LeanTweenType.easeOutElastic)
-            .setDelay(transform.parent.childCount / 8f);
+            .setDelay(transform.parent.childCount / 8f)
+            .setOnStart(() => { AudioManager.Instance.PlayHotDog(0.4f); });
     }
 }

@@ -72,6 +72,8 @@ public class IngredientObject : MonoBehaviour, ISelectable, IValidatable
             col.enabled = false;
 
         IsSelected = true;
+
+        AudioManager.Instance.PlayPickupIngredient();
     }
 
     public void Unselect()

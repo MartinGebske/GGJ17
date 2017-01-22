@@ -27,6 +27,9 @@ public class AudioManager : BitStrap.Singleton<AudioManager>
 
     public AudioClip[] CarSounds;
 
+    public AudioClip BottlePickup;
+    public AudioClip IngredientPickup;
+
     public void PlayHappyAngry(bool isHappy)
     {
         if (isHappy)
@@ -55,9 +58,9 @@ public class AudioManager : BitStrap.Singleton<AudioManager>
         PlayRandomSound(ref SquishSounds);
     }
 
-    public void PlayHotDog()
+    public void PlayHotDog(float volume = 1f)
     {
-        PlayRandomSound(ref WischSounds);
+        PlayRandomSound(ref WischSounds, volume);
     }
 
     public void PlayGameOver()
@@ -77,6 +80,16 @@ public class AudioManager : BitStrap.Singleton<AudioManager>
     public void PlayCar()
     {
         PlayRandomSound(ref CarSounds, 0.5f);
+    }
+
+    public void PlayPickupBottle()
+    {
+        AudioSource.PlayClipAtPoint(BottlePickup, Camera.main.transform.position, 0.6f);
+    }
+
+    public void PlayPickupIngredient()
+    {
+        AudioSource.PlayClipAtPoint(IngredientPickup, Camera.main.transform.position, 0.6f);
     }
 
     private void PlayRandomSound(ref AudioClip[] fromSounds, float volume = 1f)

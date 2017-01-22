@@ -152,6 +152,8 @@ public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
 
         transform.Rotate(Vector3.forward, 180.0f);
         GetComponent<Collider>().enabled = false;
+
+        AudioManager.Instance.PlayPickupBottle();
     }
 
     public void Unselect()
