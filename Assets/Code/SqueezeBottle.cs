@@ -54,16 +54,8 @@ public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
 
     private void Update()
     {
-        // DEBUGGING
-        if (Input.GetKeyDown(KeyCode.R))
-            Reset();
-        if (Input.GetKeyDown(KeyCode.T))
-            ShowValidationWave();
-        if (Input.GetKeyDown(KeyCode.S))
-            Debug.Log(name + " Score: " + GetScore());
-
         // handle movement here when it is selected
-        if (IsSelected)
+        if (IsSelected && Time.timeScale > 0)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -190,7 +182,10 @@ public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
 
     public float GetScore()
     {
-        return Mathf.Clamp(100.0f - valSqueezeLine.GetTotalDeviation(CurrentPoints), 0.0f, 100) * 2.0f;
+        float totalDeviation = valSqueezeLine.GetTotalDeviation(CurrentPoints);
+        float points = valSqueezeLine.GetPoints(CurrentPoints);
+
+        return Mathf.Clamp(points - (totalDeviation / 10f), 0f, 100f);
     }
 
     public void SetValidation(int Val)
