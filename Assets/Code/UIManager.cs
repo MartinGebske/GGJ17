@@ -215,6 +215,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
     }
     public void OnBackToMainMenuClicked()
     {
+        PlayerController.Instance.OnUnpauseGame();
         UnityEngine.SceneManagement.SceneManager.LoadScene("start", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
