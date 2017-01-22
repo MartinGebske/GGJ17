@@ -54,16 +54,8 @@ public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
 
     private void Update()
     {
-        // DEBUGGING
-        if (Input.GetKeyDown(KeyCode.R))
-            Reset();
-        if (Input.GetKeyDown(KeyCode.T))
-            ShowValidationWave();
-        if (Input.GetKeyDown(KeyCode.S))
-            Debug.Log(name + " Score: " + GetScore());
-
         // handle movement here when it is selected
-        if (IsSelected)
+        if (IsSelected && Time.timeScale > 0)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

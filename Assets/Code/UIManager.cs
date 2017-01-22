@@ -14,6 +14,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
     public Vector2 BurntXRange = new Vector2(-430f, -110f);
     public RectTransform Splash;
     public RectTransform ImgGameOver;
+    public RectTransform ImgPause;
 
     [Space(5f)]
     public Text TxtTotalAmount;
@@ -181,5 +182,14 @@ public class UIManager : BitStrap.Singleton<UIManager>
     public void OnBackToMainMenuClicked()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("start", UnityEngine.SceneManagement.LoadSceneMode.Single);
+    }
+
+    public void OnResumeClicked()
+    {
+        PlayerController.Instance.OnUnpauseGame();
+    }
+    public void TogglePauseScreen()
+    {
+
     }
 }

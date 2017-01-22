@@ -54,6 +54,14 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Time.timeScale == 0)
+                OnUnpauseGame();
+            else
+                OnPauseGame();
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -249,5 +257,16 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
             return 0.0f;
         else
             return scoreSum / (scoreCounts - bottleMod);
+    }
+
+    public void OnPauseGame()
+    {
+        Time.timeScale = 0;
+        UIManager.Instance.TogglePauseScreen();
+    }
+    public void OnUnpauseGame()
+    {
+        Time.timeScale = 1;
+        UIManager.Instance.TogglePauseScreen();
     }
 }
