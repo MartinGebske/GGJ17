@@ -261,12 +261,10 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
 
     public void OnPauseGame()
     {
-        Time.timeScale = 0;
         UIManager.Instance.TogglePauseScreen();
     }
     public void OnUnpauseGame()
     {
-        Time.timeScale = 1;
         UIManager.Instance.TogglePauseScreen();
     }
 }

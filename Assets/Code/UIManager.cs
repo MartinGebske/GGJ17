@@ -15,6 +15,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
     public RectTransform Splash;
     public RectTransform ImgGameOver;
     public RectTransform ImgPause;
+    public Button MobilePauseBtn;
 
     [Space(5f)]
     public Text TxtTotalAmount;
@@ -55,8 +56,24 @@ public class UIManager : BitStrap.Singleton<UIManager>
         Splash.offsetMax = new Vector2(0.0f, -m_CanvasWidthHeight.y);
 
         ImgGameOver.localScale = Vector3.zero;
+        ImgPause.localScale = Vector3.zero;
 
         AngryFaceAnimation.SetActive(false);
+
+        if (Application.platform != RuntimePlatform.WindowsEditor
+            && Application.platform != RuntimePlatform.WindowsPlayer
+            && Application.platform != RuntimePlatform.LinuxEditor
+            && Application.platform != RuntimePlatform.LinuxPlayer
+            && Application.platform != RuntimePlatform.OSXDashboardPlayer
+            && Application.platform != RuntimePlatform.OSXEditor
+            && Application.platform != RuntimePlatform.OSXPlayer)
+        {
+            MobilePauseBtn.gameObject.SetActive(true);
+        }
+        else
+        {
+            MobilePauseBtn.gameObject.SetActive(false);
+        }
 
         yield return new WaitForEndOfFrame();
 
@@ -184,12 +201,27 @@ public class UIManager : BitStrap.Singleton<UIManager>
         UnityEngine.SceneManagement.SceneManager.LoadScene("start", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 
+    public void OnPauseClicked()
+    {
+        PlayerController.Instance.OnPauseGame();
+    }
     public void OnResumeClicked()
     {
         PlayerController.Instance.OnUnpauseGame();
     }
     public void TogglePauseScreen()
     {
-
+        if (Time.timeScale == 1)
+        {
+            LeanTween.scale(ImgPause, Vector3.one * 1.5f, 0.8f)
+            .setEase(LeanTweenType.easeOutElastic)
+            .setOnComplete(() => { Time.timeScale = 0; });
+        }
+        else
+        {
+            Time.timeScale = 1;
+            LeanTween.scale(ImgPause, Vector3.zero, 0.5f)
+            .setEase(LeanTweenType.easeInCubic);
+        }
     }
 }
