@@ -46,39 +46,14 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
     private int m_CountAngryCustomers = 0;
 
     private float m_TotalMoney = 0.0f;
+    public float TotalMoney { get { return m_TotalMoney; } }
+    public int TotalMoneyAsScore { get { return Mathf.RoundToInt(m_TotalMoney * 100f); } }
 
     private void Start()
     {
         BtnFinishHotDog.SetActive(false);
 
         UnityEngine.SceneManagement.SceneManager.LoadScene("main_ui", UnityEngine.SceneManagement.LoadSceneMode.Additive);
-
-        StartCoroutine(PostScores("MArtinTest123", 2));
-    }
-
-
-    private string secretKey = "12312312";
-    string addScoreUrl = "http://138.68.69.107/ggj17/addscore.php?"; 
-    string highscoreUrl = "http://138.68.69.107/ggj17/display.php";
-    IEnumerator PostScores(string name, int score)
-    {
-        //This connects to a server side php script that will add the name and score to a MySQL DB.
-        // Supply it with a string representing the players name and the players score.
-        string hash = StaticUtil.Md5Sum(name + score + secretKey);
-
-        string post_url = addScoreUrl + "name=" + WWW.EscapeURL(name) + "&score=" + score + "&hash=" + hash;
-
-        Debug.LogWarning(post_url);
-        // Post the URL to the site and create a download object to get the result.
-        WWW hs_post = new WWW(post_url);
-        yield return hs_post; // Wait until the download is done
-
-        if (hs_post.error != null)
-        {
-            print("There was an error posting the high score: " + hs_post.error);
-        }
-        else
-            Debug.LogWarning(hs_post.text);
     }
 
     private void Update()

@@ -685,7 +685,7 @@ MonoBehaviour:
   orderSlip: {fileID: 1583725290412100, guid: 5245b57aeb6eb4e44a146d285ad3fe85, type: 2}
   groundspeed: 0.5
   minimumSpawnSpeed: 9
-  maximumSpawnSpeed: 15
+  maximumSpawnSpeed: 16
   secondsPerLevel: 25
   orderSpawnTime: 0
   levelOnCreation: 0

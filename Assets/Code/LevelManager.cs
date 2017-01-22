@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     public RectTransform HotDogsImg;
     public RectTransform BtnPlay;
     public RectTransform BtnInstr;
+    public RectTransform BtnLeaderboard;
     public RectTransform BtnQuit;
 
 
@@ -39,8 +40,14 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f);
 
+        if (BtnLeaderboard != null)
+            LeanTween.move(BtnLeaderboard, new Vector3(488f, 149f), 0.7f)
+                 .setEase(LeanTweenType.easeOutSine);
+
+        yield return new WaitForSeconds(0.2f);
+
         if (BtnQuit != null)
-            LeanTween.move(BtnQuit, new Vector3(488f, 149f), 0.7f)
+            LeanTween.move(BtnQuit, new Vector3(734f, 139f), 0.7f)
                  .setEase(LeanTweenType.easeOutSine);
     }
 

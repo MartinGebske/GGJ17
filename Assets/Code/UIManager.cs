@@ -16,6 +16,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
     public RectTransform ImgGameOver;
     public RectTransform ImgPause;
     public Button MobilePauseBtn;
+    public HighscoreSubmit HighScoreSubmit;
 
     [Space(5f)]
     public Text TxtTotalAmount;
@@ -56,6 +57,7 @@ public class UIManager : BitStrap.Singleton<UIManager>
         Splash.offsetMax = new Vector2(0.0f, -m_CanvasWidthHeight.y);
 
         ImgGameOver.localScale = Vector3.zero;
+        HighScoreSubmit.GetComponent<RectTransform>().localScale = Vector3.zero;
         ImgPause.localScale = Vector3.zero;
 
         AngryFaceAnimation.SetActive(false);
@@ -151,6 +153,12 @@ public class UIManager : BitStrap.Singleton<UIManager>
 
         LeanTween.scale(ImgGameOver, Vector3.one * 1.5f, 1.0f)
             .setEase(LeanTweenType.easeOutElastic);
+
+        LeanTween.scale(HighScoreSubmit.GetComponent<RectTransform>(), Vector3.one, 1.0f)
+                    .setEase(LeanTweenType.easeOutElastic)
+                    .setDelay(0.5f);
+
+        HighScoreSubmit.Init(PlayerController.Instance.TotalMoneyAsScore);
     }
 
     /* For Scrollbar
