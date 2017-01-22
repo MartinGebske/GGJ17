@@ -44,7 +44,9 @@ public class HighscoreSubmit : MonoBehaviour {
         }
         else
         {
-
+            PlayerPrefs.SetString("last_name", name);
+            PlayerPrefs.SetInt("last_score", score);
+            PlayerPrefs.Save();
         }
 
         gameObject.SetActive(false);
