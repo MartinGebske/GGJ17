@@ -1571,6 +1571,40 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4b35ec86d8d2d314398464575f2aabb8, type: 3}
   - {fileID: 8300000, guid: fdfc16701e03dfd4fba96d4d79744f9f, type: 3}
   - {fileID: 8300000, guid: 275a19aa5b1b4ab4d8451a3aa5466a32, type: 3}
+  ClickSounds:
+  - {fileID: 8300000, guid: 0f41dd6911f18c04aa0001fd91a505fe, type: 3}
+  - {fileID: 8300000, guid: fc15eaa73f790004e93e408286e69d94, type: 3}
+  - {fileID: 8300000, guid: 2e4887432891a434da5a782292804deb, type: 3}
+  - {fileID: 8300000, guid: 38aa430ae0715e0418dc7d8293bd24d4, type: 3}
+  - {fileID: 8300000, guid: ecb7411887fdb5b4f83bdebe9f6cd439, type: 3}
+  ExplodeSounds:
+  - {fileID: 8300000, guid: c5bb22c5bf63df84b8fda4894f53230f, type: 3}
+  - {fileID: 8300000, guid: 28f918cf72006ce498616ba32bd38e4f, type: 3}
+  - {fileID: 8300000, guid: bc6ac00df44308a4c85341497af4446e, type: 3}
+  - {fileID: 8300000, guid: 94c3c34c9b306154aa74575f509890a3, type: 3}
+  - {fileID: 8300000, guid: a675e36454060c44f9737a84c317cd03, type: 3}
+  - {fileID: 8300000, guid: 8f73c164a949356439b282ce5ac55b39, type: 3}
+  - {fileID: 8300000, guid: 45d3e36fa77340546adb14ec3eb5183b, type: 3}
+  - {fileID: 8300000, guid: f66df3d278b04f04c971ed99667a4853, type: 3}
+  - {fileID: 8300000, guid: 3dc3060fa52fbfa4cb37e3156974bb67, type: 3}
+  LunteSounds:
+  - {fileID: 8300000, guid: e99ece6ccc570704788a79946d72ae55, type: 3}
+  - {fileID: 8300000, guid: 21aa8347b87121e48bea17f66d0b2f9a, type: 3}
+  - {fileID: 8300000, guid: afa1bc3a68d9e6c43863a17aa4126785, type: 3}
+  - {fileID: 8300000, guid: 94e459806b9ce1b47b60ee651462518c, type: 3}
+  - {fileID: 8300000, guid: 0e7b18c6e12f19f4592d8155aba30cac, type: 3}
+  - {fileID: 8300000, guid: 84d9a19bd2946e74db9bfabadf310103, type: 3}
+  GameOverSounds:
+  - {fileID: 8300000, guid: 00445021686c21247822ee36fd074ff1, type: 3}
+  - {fileID: 8300000, guid: 135bc0c9ee6f3a745a5fd5543e3c3514, type: 3}
+  - {fileID: 8300000, guid: 29643c2e3b739d5499c8fc5070152924, type: 3}
+  CarSounds:
+  - {fileID: 8300000, guid: d3b8c443622146440a3e40fc3eec737c, type: 3}
+  - {fileID: 8300000, guid: 4adb848a91272ce4c86f23c1ce349785, type: 3}
+  - {fileID: 8300000, guid: 02ecb8bc3fe22aa4081b8e1ed3fcc7a2, type: 3}
+  - {fileID: 8300000, guid: 84e7fc7f423f7b04bb0e89e36183a191, type: 3}
+  - {fileID: 8300000, guid: 2dbfa9868718a564994fd18cd41db6a6, type: 3}
+  - {fileID: 8300000, guid: d461a79eca425ef4b94e0ba8f5175e50, type: 3}
 --- !u!4 &1267210779
 Transform:
   m_ObjectHideFlags: 0

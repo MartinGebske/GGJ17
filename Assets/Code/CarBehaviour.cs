@@ -6,10 +6,13 @@ public class CarBehaviour : MonoBehaviour
 {
 
     float speed;
+    float lastX;
 
     private void Start()
     {
-        speed = Random.Range(20, 100);
+        lastX = transform.position.x;
+
+        speed = Random.Range(50, 100);
 
         Invoke("DestroyCar", 30);
     }
@@ -24,6 +27,12 @@ public class CarBehaviour : MonoBehaviour
             gameObject.transform.Translate(Vector3.left * Time.deltaTime * speed);
         }
         
+        if (lastX < 0f && transform.position.x > 0f)
+            AudioManager.Instance.PlayCar();
+        else if (lastX > 0f && transform.position.x < 0f)
+            AudioManager.Instance.PlayCar();
+
+        lastX = transform.position.x;
     }
 
     void DestroyCar()

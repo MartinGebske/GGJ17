@@ -113,6 +113,8 @@ public class UIManager : BitStrap.Singleton<UIManager>
 
         AngryFaceAnimation.SetActive(true);
 
+        AudioManager.Instance.PlayLunte();
+
         LeanTween.value(gameObject, ChangeAngerMeterSize, m_CurrentAngerMeterSize, amount, 1.5f)
             .setEase(LeanTweenType.easeOutCubic)
             .setOnComplete(() => { if (m_CurrentAngerMeterSize >= 1.0f) BlowUpSplash(); });
@@ -132,6 +134,8 @@ public class UIManager : BitStrap.Singleton<UIManager>
     {
         if (m_ShowingGameOverScreen)
             return;
+
+        AudioManager.Instance.PlayExplode();
 
         AngryTop.gameObject.SetActive(false);
         Funke.gameObject.SetActive(false);
@@ -159,6 +163,8 @@ public class UIManager : BitStrap.Singleton<UIManager>
                     .setDelay(0.5f);
 
         HighScoreSubmit.Init(PlayerController.Instance.TotalMoneyAsScore);
+
+        AudioManager.Instance.PlayGameOver();
     }
 
     /* For Scrollbar
@@ -180,15 +186,16 @@ public class UIManager : BitStrap.Singleton<UIManager>
 
         LeanTween.value(gameObject, ChangeTxtAddedAmount, 0f, AddedAmount / 10.0f, 1.5f)
             .setEase(LeanTweenType.easeOutCubic)
-            .setOnComplete(() => MoveTxtAddedOut(NewTotalAmount));
+            .setOnComplete(() => MoveTxtAddedOut(NewTotalAmount, AddedAmount));
     }
     private void ChangeTxtAddedAmount(float value)
     {
         TxtAddedAmount.text = value.ToString("c2");
     }
-    private void MoveTxtAddedOut(float newTotal)
+    private void MoveTxtAddedOut(float newTotal, float AddedAmount)
     {
-        AudioManager.Instance.PlayCash();
+        if (AddedAmount > 1f)
+            AudioManager.Instance.PlayCash();
 
         LeanTween.moveY(TxtAddedAmount.rectTransform, -90.0f, 1.0f)
             .setDelay(1.0f)

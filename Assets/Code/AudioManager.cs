@@ -19,6 +19,14 @@ public class AudioManager : BitStrap.Singleton<AudioManager>
 
     public AudioClip[] WischSounds;
 
+    public AudioClip[] ClickSounds;
+
+    public AudioClip[] ExplodeSounds;
+    public AudioClip[] LunteSounds;
+    public AudioClip[] GameOverSounds;
+
+    public AudioClip[] CarSounds;
+
     public void PlayHappyAngry(bool isHappy)
     {
         if (isHappy)
@@ -52,10 +60,29 @@ public class AudioManager : BitStrap.Singleton<AudioManager>
         PlayRandomSound(ref WischSounds);
     }
 
-    private void PlayRandomSound(ref AudioClip[] fromSounds)
+    public void PlayGameOver()
+    {
+        PlayRandomSound(ref GameOverSounds);
+    }
+
+    public void PlayLunte()
+    {
+        PlayRandomSound(ref LunteSounds);
+    }
+    public void PlayExplode()
+    {
+        PlayRandomSound(ref ExplodeSounds);
+    }
+
+    public void PlayCar()
+    {
+        PlayRandomSound(ref CarSounds, 0.5f);
+    }
+
+    private void PlayRandomSound(ref AudioClip[] fromSounds, float volume = 1f)
     {
         AudioClip chosenClip = fromSounds[Random.Range(0, fromSounds.Length)];
 
-        AudioSource.PlayClipAtPoint(chosenClip, Camera.main.transform.position);
+        AudioSource.PlayClipAtPoint(chosenClip, Camera.main.transform.position, volume);
     }
 }
