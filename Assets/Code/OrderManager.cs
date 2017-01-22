@@ -45,9 +45,9 @@ public class OrderManager : BitStrap.Singleton<OrderManager>
 
      float CalculateSpawnTime(int level)
         {
-        float thisLevel = level;
-        float min = minimumSpawnSpeed; /// (level +1);
-        float max = maximumSpawnSpeed; /// (level +1);
+        float reduction = -4f + level;
+        float min = minimumSpawnSpeed + reduction; /// (level +1);
+        float max = maximumSpawnSpeed + reduction; /// (level +1);
 
          float spawnTime = Random.Range(min, max);
 

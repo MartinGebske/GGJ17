@@ -102,7 +102,7 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
             m_HotDogObject.transform.localPosition = Vector3.zero;
             m_HotDogObject.transform.parent = null;
 
-            LeanTween.move(m_HotDogObject, HotDogMoveTo, 1f)
+            LeanTween.move(m_HotDogObject, HotDogMoveTo, 0.4f)
                 .setEase(LeanTweenType.easeOutCubic)
                 .setOnComplete(SetBottleValidity);
 
@@ -197,9 +197,9 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
         // Back to initial state
         ResetAll();
 
-        LeanTween.move(m_HotDogObject, HotDogSpawn, 0.6f)
-                .setEase(LeanTweenType.easeOutCubic)
-                .setOnComplete(()=> { Destroy(m_HotDogObject); });
+        LeanTween.move(m_HotDogObject, HotDogSpawn, 0.3f)
+            .setEase(LeanTweenType.easeOutCubic)
+            .setOnComplete(()=> { Destroy(m_HotDogObject); });
         
         m_SelectedOrder = null;
         BtnFinishHotDog.SetActive(false);

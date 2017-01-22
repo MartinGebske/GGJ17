@@ -36,6 +36,8 @@ public class Order : MonoBehaviour, IPointerClickHandler
 
     private int currentLevel = 0;
 
+    private float speedMod = 0f;
+
     void Start ()
     {
 
@@ -60,7 +62,8 @@ public class Order : MonoBehaviour, IPointerClickHandler
 
     void Update()
     {
-        orderTransform.Translate(Vector3.right * orderManager.speedOnCreation * Time.deltaTime);
+        Debug.Log(orderManager.speedOnCreation);
+        orderTransform.Translate(Vector3.right * (orderManager.speedOnCreation + speedMod) * Time.deltaTime);
 
         if (!reachedEndPos && orderTransform.anchoredPosition.x > endposition)
         {
@@ -129,6 +132,11 @@ public class Order : MonoBehaviour, IPointerClickHandler
             chosenSauces.Add(sauces[i]);
             sauces[i].SetActive(true);
         }
+
+        if (sauceIndices.Count == 2)
+            speedMod = -0.2f;
+        else if (sauceIndices.Count == 3)
+            speedMod = -0.4f;
     }
    
     int CalculateMaxIngredients(int level)
