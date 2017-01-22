@@ -15,9 +15,6 @@ public class Order : MonoBehaviour, IPointerClickHandler
 
     public float endposition;
 
-    public AudioClip guestHappySound;
-    public AudioClip guestAngrySound;
-
     public Sprite[] zettelImages;
 
    // [HideInInspector] public int currentLevel;
@@ -38,7 +35,7 @@ public class Order : MonoBehaviour, IPointerClickHandler
 
     private float speedMod = 0f;
 
-    void Start ()
+    IEnumerator Start ()
     {
 
         sprRenderer = GetComponent<SpriteRenderer>();
@@ -58,6 +55,9 @@ public class Order : MonoBehaviour, IPointerClickHandler
         FillIngredients();
 
         SelectSauce();
+
+        yield return new WaitForSeconds(2f);
+        AudioManager.Instance.PlayOrder();
     }
 
     void Update()
@@ -76,13 +76,13 @@ public class Order : MonoBehaviour, IPointerClickHandler
 
     public void GuestIsHappy()
     {
-        audioSource.PlayOneShot(guestHappySound);
+        AudioManager.Instance.PlayHappyAngry(true);
         StartCoroutine(WaitForDestroy());
     }
 
     public void GuestIsAngry()
     {
-        audioSource.PlayOneShot(guestAngrySound);
+        AudioManager.Instance.PlayHappyAngry(false);
         StartCoroutine(WaitForDestroy());
     }
 

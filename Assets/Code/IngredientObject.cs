@@ -57,6 +57,8 @@ public class IngredientObject : MonoBehaviour, ISelectable, IValidatable
                             RotOffset.x + UnityEngine.Random.Range(-15.0f, 15.0f), 
                             RotOffset.y, 
                             RotOffset.z + UnityEngine.Random.Range(-15.0f, 15.0f))));
+
+                    AudioManager.Instance.PlayIngredient();
                 }
             }
         }

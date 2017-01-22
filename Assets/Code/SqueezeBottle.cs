@@ -72,6 +72,8 @@ public class SqueezeBottle : MonoBehaviour, ISelectable, IValidatable
 
                 // start particle effect
                 m_ParticleSystem.Play();
+
+                AudioManager.Instance.PlayBottle();
             }
             else if (Input.GetMouseButtonUp(0))
             {

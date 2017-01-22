@@ -188,6 +188,8 @@ public class UIManager : BitStrap.Singleton<UIManager>
     }
     private void MoveTxtAddedOut(float newTotal)
     {
+        AudioManager.Instance.PlayCash();
+
         LeanTween.moveY(TxtAddedAmount.rectTransform, -90.0f, 1.0f)
             .setDelay(1.0f)
             .setEaseInElastic()

@@ -102,6 +102,8 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
             m_HotDogObject.transform.localPosition = Vector3.zero;
             m_HotDogObject.transform.parent = null;
 
+            AudioManager.Instance.PlayHotDog();
+
             LeanTween.move(m_HotDogObject, HotDogMoveTo, 0.4f)
                 .setEase(LeanTweenType.easeOutCubic)
                 .setOnComplete(SetBottleValidity);
