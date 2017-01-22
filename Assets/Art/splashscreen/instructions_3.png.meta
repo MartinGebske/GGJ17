@@ -1,13 +1,22 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: a006b8aaede365c41bd527c99c66bf76
 timeCreated: 1485043059
+=======
+guid: 1cb5d569a0a27fe44b1fe345f0f54eee
+timeCreated: 1485043446
+>>>>>>> master
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
+<<<<<<< HEAD
     enableMipMap: 1
+=======
+    enableMipMap: 0
+>>>>>>> master
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -30,11 +39,19 @@ TextureImporter:
     filterMode: -1
     aniso: -1
     mipBias: -1
+<<<<<<< HEAD
     wrapMode: -1
   nPOTScale: 1
   lightmap: 0
   compressionQuality: 50
   spriteMode: 0
+=======
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+>>>>>>> master
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -42,9 +59,15 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaUsage: 1
+<<<<<<< HEAD
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
   textureType: 0
+=======
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+>>>>>>> master
   textureShape: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
@@ -58,6 +81,33 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+<<<<<<< HEAD
+=======
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+>>>>>>> master
   spriteSheet:
     serializedVersion: 2
     sprites: []
