@@ -33,7 +33,6 @@ public class HighscoreSubmit : MonoBehaviour {
 
         string post_url = addScoreUrl + "name=" + WWW.EscapeURL(name) + "&score=" + score + "&hash=" + hash;
 
-        Debug.LogWarning(post_url);
         // Post the URL to the site and create a download object to get the result.
         WWW hs_post = new WWW(post_url);
         yield return hs_post; // Wait until the download is done

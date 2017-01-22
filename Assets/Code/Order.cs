@@ -62,7 +62,6 @@ public class Order : MonoBehaviour, IPointerClickHandler
 
     void Update()
     {
-        Debug.Log(orderManager.speedOnCreation);
         orderTransform.Translate(Vector3.right * (orderManager.speedOnCreation + speedMod) * Time.deltaTime);
 
         if (!reachedEndPos && orderTransform.anchoredPosition.x > endposition)
