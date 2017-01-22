@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1799347657433726}
   m_LocalRotation: {x: -0.70710576, y: -0, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 0, y: 1.088, z: 0}
+  m_LocalPosition: {x: 0, y: 1.484, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4301397216993238}
@@ -82,8 +82,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1260306466898396}
   m_LocalRotation: {x: -0, y: 0.22747143, z: -0, w: 0.9737848}
-  m_LocalPosition: {x: 6.285774, y: 1.85, z: 10.44667}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 5.53, y: 2.4, z: 9.82}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 4156252575362402}
   - {fileID: 4841947975809452}
@@ -159,8 +159,8 @@ MonoBehaviour:
   SqueezeLineValidationPrefab: {fileID: 114728818687691972, guid: bdf2f13b25e9bfe4baa991e1794d0c62,
     type: 2}
   PointsMinDistance: 0.15
-  UpOffset: 5
-  SqueezeDelaySeconds: 0.15
+  UpOffset: 6.5
+  SqueezeDelaySeconds: 0.18
   ValidationOffset: {x: -4.9, y: 2.6, z: -0.4}
   UsesSine: 1
   UsesSineOffset: 0
@@ -237,7 +237,7 @@ ParticleSystem:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 0.4
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -689,7 +689,7 @@ ParticleSystem:
     enabled: 1
     type: 4
     radius: 0.1
-    angle: 1
+    angle: 0
     length: 5
     boxX: 1
     boxY: 1
@@ -711,7 +711,7 @@ ParticleSystem:
     enabled: 1
     serializedVersion: 3
     rateOverTime:
-      scalar: 50
+      scalar: 30
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2541,10 +2541,10 @@ ParticleSystem:
       minMaxState: 0
     maxLights: 20
   TrailModule:
-    enabled: 0
+    enabled: 1
     ratio: 1
     lifetime:
-      scalar: 1
+      scalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2584,7 +2584,7 @@ ParticleSystem:
       minMaxState: 0
     minVertexDistance: 0.2
     textureMode: 0
-    worldSpace: 0
+    worldSpace: 1
     dieWithParticles: 1
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
@@ -2829,7 +2829,7 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 2100000, guid: 7391cb8c16810d54998db21406a04c4c, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 7391cb8c16810d54998db21406a04c4c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2847,13 +2847,13 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
-  m_LengthScale: 2
+  m_LengthScale: 4
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_RenderAlignment: 0
