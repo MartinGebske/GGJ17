@@ -19,6 +19,7 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
     [Header("Config")]
     public GameObject BtnFinishHotDog;
     public Transform HotDogSpawn;
+    public Transform HotDogMoveTo;
     public GameObject HotDogPrefab;
     public float[] GuestHappyThresholdPerSauceCount;
     public int CountAngryUntilLost = 6;
@@ -96,6 +97,11 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
             // Instantiate HotDog
             m_HotDogObject = Instantiate<GameObject>(HotDogPrefab, HotDogSpawn);
             m_HotDogObject.transform.localPosition = Vector3.zero;
+            m_HotDogObject.transform.parent = null;
+
+            LeanTween.move(m_HotDogObject, HotDogMoveTo, 1f)
+                .setEase(LeanTweenType.easeOutCubic)
+                .setOnComplete(SetBottleValidity);
 
             // Ingredients: set the validation counts
             IngrCheese.SetValidation(m_SelectedOrder.GetIngredientCount(IngredientObject.IngredientType.Cheese));
@@ -104,35 +110,39 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
             IngrTomato.SetValidation(m_SelectedOrder.GetIngredientCount(IngredientObject.IngredientType.Tomato));
             IngrBanana.SetValidation(m_SelectedOrder.GetIngredientCount(IngredientObject.IngredientType.Banana));
 
-
-            // Bottles: set whether it is active and a random state
-            if (m_SelectedOrder.GetSqueezeBottleActive(SqueezeBottle.SqueezeBottleType.Ketchup))
-            {
-                BottleKetchup.SetValidation(Random.Range(1, 6));
-            }
-            else
-                BottleKetchup.SetValidation(0);
-
-            if (m_SelectedOrder.GetSqueezeBottleActive(SqueezeBottle.SqueezeBottleType.Mustard))
-            {
-                BottleMustard.SetValidation(Random.Range(1, 6));
-            }
-            else
-                BottleMustard.SetValidation(0);
-
-            if (m_SelectedOrder.GetSqueezeBottleActive(SqueezeBottle.SqueezeBottleType.Chocolate))
-            {
-                BottleChocolate.SetValidation(Random.Range(1, 6));
-            }
-            else
-                BottleChocolate.SetValidation(0);
-
             return true;
         }
         else
         {
             return false;
         }
+    }
+
+    private void SetBottleValidity()
+    {
+        if (m_SelectedOrder == null) return;
+
+        // Bottles: set whether it is active and a random state
+        if (m_SelectedOrder.GetSqueezeBottleActive(SqueezeBottle.SqueezeBottleType.Ketchup))
+        {
+            BottleKetchup.SetValidation(Random.Range(1, 6));
+        }
+        else
+            BottleKetchup.SetValidation(0);
+
+        if (m_SelectedOrder.GetSqueezeBottleActive(SqueezeBottle.SqueezeBottleType.Mustard))
+        {
+            BottleMustard.SetValidation(Random.Range(1, 6));
+        }
+        else
+            BottleMustard.SetValidation(0);
+
+        if (m_SelectedOrder.GetSqueezeBottleActive(SqueezeBottle.SqueezeBottleType.Chocolate))
+        {
+            BottleChocolate.SetValidation(Random.Range(1, 6));
+        }
+        else
+            BottleChocolate.SetValidation(0);
     }
 
     public bool OrderReachedEnd(Order order)
@@ -183,7 +193,11 @@ public class PlayerController : BitStrap.Singleton<PlayerController>
 
         // Back to initial state
         ResetAll();
-        Destroy(m_HotDogObject);
+
+        LeanTween.move(m_HotDogObject, HotDogSpawn, 0.6f)
+                .setEase(LeanTweenType.easeOutCubic)
+                .setOnComplete(()=> { Destroy(m_HotDogObject); });
+        
         m_SelectedOrder = null;
         BtnFinishHotDog.SetActive(false);
     }
